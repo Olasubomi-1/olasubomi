@@ -14,24 +14,24 @@ const projects = [
   },
   {
     id: 2,
-    title: "Editorial Design",
-    category: "Design",
+    title: "Editorial Design System",
+    category: "Designs",
     image: project2,
     description: "Modern magazine layout and typography system",
   },
   {
     id: 3,
-    title: "Campaign Creative",
-    category: "Advertising",
+    title: "Brand Campaign Film",
+    category: "Video Content",
     image: project3,
-    description: "Award-winning advertising campaign for luxury fashion",
+    description: "Cinematic brand story for luxury fashion house",
   },
   {
     id: 4,
-    title: "Digital Experience",
-    category: "UX/UI",
+    title: "Integrated Campaign",
+    category: "Campaigns",
     image: project4,
-    description: "Sophisticated web platform with seamless user experience",
+    description: "Multi-channel campaign driving digital engagement",
   },
 ];
 
@@ -70,14 +70,18 @@ const Portfolio = () => {
                   hoveredId === project.id ? "opacity-100" : "opacity-0 md:opacity-0"
                 } flex flex-col justify-end p-6 md:p-8`}
               >
-                <span className="text-sm font-medium text-accent mb-2">{project.category}</span>
+                <span className={`text-sm font-medium mb-2 ${
+                  index % 2 === 0 ? "text-accent" : "text-blue"
+                }`}>{project.category}</span>
                 <h3 className="text-2xl md:text-3xl font-bold mb-2">{project.title}</h3>
                 <p className="text-muted-foreground">{project.description}</p>
               </div>
 
               {/* Mobile: Always show info */}
               <div className="md:hidden bg-background p-6 border-t border-border">
-                <span className="text-sm font-medium text-accent mb-2 block">{project.category}</span>
+                <span className={`text-sm font-medium mb-2 block ${
+                  index % 2 === 0 ? "text-accent" : "text-blue"
+                }`}>{project.category}</span>
                 <h3 className="text-xl font-bold mb-2">{project.title}</h3>
                 <p className="text-sm text-muted-foreground">{project.description}</p>
               </div>
