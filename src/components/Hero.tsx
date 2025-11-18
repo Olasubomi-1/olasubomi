@@ -24,17 +24,23 @@ const Hero = () => {
       {/* Content */}
       <div className="container mx-auto px-6 z-20 text-center">
         <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-balance">
-            Crafting Visual
-            <span className="block text-accent">Experiences</span>
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto text-balance">
-            Award-winning creative director specializing in brand strategy, visual design,
-            and innovative campaigns that drive results.
+          <div className="space-y-4">
+            <p className="text-lg md:text-xl text-muted-foreground">Hi, I am</p>
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight">
+              Jason
+            </h1>
+          </div>
+          <p className="text-lg md:text-2xl text-foreground max-w-3xl mx-auto text-balance leading-relaxed">
+            I design <span className="text-accent font-semibold">motion that feels alive</span>, 
+            blending design, timing, and storytelling in every frame.
+          </p>
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
+            My work turns products into experiences and messages into visuals that catch eyes and keep them, 
+            helping brands show their value <span className="text-blue font-medium">without saying a word</span>.
           </p>
           <button
             onClick={scrollToWork}
-            className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors group"
+            className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:text-accent/80 transition-colors group mt-4"
           >
             <span>Explore Work</span>
             <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
