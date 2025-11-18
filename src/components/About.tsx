@@ -25,16 +25,16 @@ const About = () => {
           </div>
 
           <div className="space-y-8 animate-slide-up" style={{ animationDelay: "200ms" }}>
-            <div className="border-l-2 border-accent pl-6 space-y-2">
-              <div className="text-5xl md:text-6xl font-bold text-accent">10+</div>
+            <div className="border-l-2 border-blue pl-6 space-y-2">
+              <div className="text-5xl md:text-6xl font-bold text-blue">10+</div>
               <div className="text-muted-foreground">Years Experience</div>
             </div>
             <div className="border-l-2 border-accent pl-6 space-y-2">
               <div className="text-5xl md:text-6xl font-bold text-accent">50+</div>
               <div className="text-muted-foreground">Projects Delivered</div>
             </div>
-            <div className="border-l-2 border-accent pl-6 space-y-2">
-              <div className="text-5xl md:text-6xl font-bold text-accent">15+</div>
+            <div className="border-l-2 border-blue pl-6 space-y-2">
+              <div className="text-5xl md:text-6xl font-bold text-blue">15+</div>
               <div className="text-muted-foreground">Awards Won</div>
             </div>
           </div>

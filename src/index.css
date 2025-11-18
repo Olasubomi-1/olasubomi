@@ -41,6 +41,8 @@ All colors MUST be HSL.
     /* Custom portfolio tokens */
     --gold: 43 74% 53%;
     --gold-foreground: 0 0% 5%;
+    --blue: 217 91% 60%;
+    --blue-foreground: 0 0% 98%;
     --dark: 0 0% 5%;
     --dark-foreground: 0 0% 98%;
     
