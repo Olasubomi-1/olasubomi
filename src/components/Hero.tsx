@@ -31,12 +31,12 @@ const Hero = () => {
             </h1>
           </div>
           <p className="text-lg md:text-2xl text-foreground max-w-3xl mx-auto text-balance leading-relaxed">
-            I design <span className="text-accent font-semibold">motion that feels alive</span>, 
-            blending design, timing, and storytelling in every frame.
+            I'm a <span className="text-blue font-semibold">visual creator</span> crafting content 
+            that captivates, tells stories, and brings brands to life.
           </p>
           <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-            My work turns products into experiences and messages into visuals that catch eyes and keep them, 
-            helping brands show their value <span className="text-blue font-medium">without saying a word</span>.
+            From cinematic long-form videos to dynamic motion visuals and viral short-form content, 
+            I create visuals that <span className="text-blue font-medium">connect and inspire</span>.
           </p>
           <button
             onClick={scrollToWork}

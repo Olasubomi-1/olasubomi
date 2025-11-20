@@ -1,25 +1,25 @@
-import { Palette, Megaphone, Layout, Users } from "lucide-react";
+import { Video, Sparkles, Zap, Film } from "lucide-react";
 
 const services = [
   {
-    icon: Palette,
-    title: "Brand Strategy",
-    description: "Comprehensive brand identity development, positioning, and visual systems that resonate with your audience.",
+    icon: Film,
+    title: "Long Form Videos",
+    description: "Cinematic brand documentaries, product films, and storytelling content that captivates and engages audiences.",
   },
   {
-    icon: Megaphone,
-    title: "Campaign Creative",
-    description: "Integrated marketing campaigns that drive engagement and deliver measurable results across all channels.",
+    icon: Sparkles,
+    title: "Motion Visuals",
+    description: "Dynamic motion graphics, animated logos, and visual effects that bring brands to life with movement and energy.",
   },
   {
-    icon: Layout,
-    title: "Art Direction",
-    description: "Visual storytelling and creative direction for editorial, advertising, and digital experiences.",
+    icon: Zap,
+    title: "Short Form Content",
+    description: "Viral-ready social media content, reels, and TikToks optimized for maximum engagement and shareability.",
   },
   {
-    icon: Users,
-    title: "Team Leadership",
-    description: "Building and mentoring high-performing creative teams to execute bold, innovative work.",
+    icon: Video,
+    title: "Video Production",
+    description: "End-to-end video production from concept to delivery, including filming, editing, and post-production.",
   },
 ];
 
@@ -30,7 +30,7 @@ const Services = () => {
         <div className="max-w-2xl mb-16 animate-slide-up">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Services</h2>
           <p className="text-lg text-muted-foreground">
-            Comprehensive creative solutions tailored to elevate your brand and achieve your goals.
+            Professional video content creation tailored to elevate your brand and captivate your audience.
           </p>
         </div>
 
