@@ -10,31 +10,31 @@ import project4 from "@/assets/project-4.jpg";
 const projects = [
   {
     id: 1,
-    title: "Luxury Brand Identity",
-    category: "Branding",
+    title: "Brand Documentary Series",
+    category: "Long Form Videos",
     image: project1,
-    description: "Complete brand identity for a premium lifestyle brand",
+    description: "Cinematic storytelling for brand narratives and documentaries",
   },
   {
     id: 2,
-    title: "Editorial Design System",
-    category: "Designs",
+    title: "Visual Identity Animations",
+    category: "Motion Visuals",
     image: project2,
-    description: "Modern magazine layout and typography system",
+    description: "Dynamic motion graphics and animated visual systems",
   },
   {
     id: 3,
-    title: "Brand Campaign Film",
-    category: "Video Content",
+    title: "Social Media Reels",
+    category: "Short Form Content",
     image: project3,
-    description: "Cinematic brand story for luxury fashion house",
+    description: "Engaging short-form content optimized for social platforms",
   },
   {
     id: 4,
-    title: "Integrated Campaign",
-    category: "Campaigns",
+    title: "Product Launch Film",
+    category: "Long Form Videos",
     image: project4,
-    description: "Multi-channel campaign driving digital engagement",
+    description: "High-impact video content for product announcements",
   },
 ];
 

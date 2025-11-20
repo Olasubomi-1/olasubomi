@@ -5,21 +5,21 @@ const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="space-y-6 animate-slide-up">
             <h2 className="text-4xl md:text-5xl font-bold">
-              Creating Impact Through Design
+              Bringing Stories to Life Through Visuals
             </h2>
             <div className="space-y-4 text-lg text-muted-foreground">
               <p>
-                With over a decade of experience leading creative teams and shaping brand narratives,
-                I've had the privilege of working with industry leaders across fashion, technology,
-                and luxury sectors.
+                As a visual creator, I specialize in crafting compelling video content that resonates. 
+                From long-form documentaries to scroll-stopping social media content, I create visuals 
+                that capture attention and drive engagement.
               </p>
               <p>
-                My approach combines strategic thinking with bold creative execution, always focused
-                on delivering measurable results and unforgettable experiences.
+                My approach blends cinematic techniques with modern editing styles, always focused
+                on telling authentic stories that connect with audiences across all platforms.
               </p>
               <p>
-                From concept to completion, I believe in the power of design to transform businesses
-                and connect with audiences on a deeper level.
+                Whether it's a brand film, motion graphics, or viral short-form content, I believe 
+                in the power of visual storytelling to inspire action and create lasting impressions.
               </p>
             </div>
           </div>
