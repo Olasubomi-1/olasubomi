@@ -41,7 +41,7 @@ const Navigation = () => {
             onClick={() => scrollToSection("hero")}
             className="text-xl font-bold tracking-tight hover:text-accent transition-colors"
           >
-            CD
+            SA
           </button>
 
           {/* Desktop Navigation */}
