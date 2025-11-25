@@ -11,47 +11,56 @@ const Hero = () => {
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#03045A]">
-      {/* Background Image */}
+      {/* Background Image with Gradient Overlay */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-[#03045A]/90 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#03045A] via-[#03045A]/95 to-[#0a0e5f] z-10" />
         <img
           src={heroImage}
           alt="Creative background"
-          className="w-full h-full object-cover opacity-20"
+          className="w-full h-full object-cover opacity-10"
         />
+        {/* Decorative Elements */}
+        <div className="absolute top-20 right-10 w-72 h-72 bg-white/5 rounded-full blur-3xl z-10" />
+        <div className="absolute bottom-20 left-10 w-96 h-96 bg-white/3 rounded-full blur-3xl z-10" />
       </div>
 
       {/* Content */}
       <div className="container mx-auto px-6 z-20 text-center">
-        <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
-          <div className="space-y-4">
-            <p className="text-lg md:text-xl text-white/80">Hi, I am</p>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-white">
+        <div className="max-w-5xl mx-auto space-y-12 animate-fade-in">
+          <div className="space-y-6">
+            <p className="text-sm md:text-base text-white/60 tracking-[0.3em] uppercase font-light">
+              Hi, I am
+            </p>
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-white leading-none">
               Jason
             </h1>
           </div>
-          <p className="text-lg md:text-2xl text-white max-w-3xl mx-auto text-balance leading-relaxed">
-            I'm a <span className="text-white font-semibold">visual creator</span> crafting content 
-            that captivates, tells stories, and brings brands to life.
-          </p>
-          <p className="text-base md:text-lg text-white/90 max-w-2xl mx-auto text-balance">
-            From cinematic long-form videos to dynamic motion visuals and viral short-form content, 
-            I create visuals that <span className="text-white font-medium">connect and inspire</span>.
-          </p>
-          <button
-            onClick={scrollToWork}
-            className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-white/80 transition-colors group mt-4"
-          >
-            <span>Explore Work</span>
-            <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
-          </button>
+          
+          <div className="space-y-6 max-w-3xl mx-auto">
+            <p className="text-xl md:text-3xl text-white font-light leading-relaxed">
+              I design motion that <span className="font-semibold italic">feels alive</span>, blending design, timing, and storytelling in every frame.
+            </p>
+            <p className="text-base md:text-lg text-white/80 leading-relaxed font-light max-w-2xl mx-auto">
+              My work turns products into experiences and messages into visuals that catch eyes and keep them, helping brands show their value without saying a word.
+            </p>
+          </div>
+
+          <div className="pt-8">
+            <button
+              onClick={scrollToWork}
+              className="group inline-flex items-center gap-3 px-8 py-4 text-sm font-medium tracking-wider uppercase text-white border border-white/20 hover:bg-white hover:text-[#03045A] transition-all duration-300"
+            >
+              <span>Explore Work</span>
+              <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-2 bg-white rounded-full animate-pulse" />
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 animate-bounce">
+        <div className="w-6 h-10 border border-white/20 rounded-full flex items-start justify-center p-2">
+          <div className="w-1 h-3 bg-white/40 rounded-full animate-pulse" />
         </div>
       </div>
     </section>
