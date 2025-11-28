@@ -24,7 +24,7 @@ const categories = [
     title: "Motion Visuals",
     assets: [
       { id: 5, video: visualIdentityVideo, title: "Visual Identity Animations" },
-      { id: 6, image: project2, title: "Brand Motion System" },
+      { id: 6, image: project2, title: "Product Animation" },
       { id: 7, image: project2, title: "UI Animations" },
       { id: 8, image: project2, title: "Logo Reveal" },
     ],
