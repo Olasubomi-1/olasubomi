@@ -1,169 +1,135 @@
-import { useState, useCallback, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef, useEffect } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
-import { Button } from "@/components/ui/button";
+import Autoplay from "embla-carousel-autoplay";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
 
-const projects = [
+const categories = [
   {
-    id: 1,
-    title: "Brand Documentary Series",
-    category: "Long Form Videos",
-    image: project1,
-    description: "Cinematic storytelling for brand narratives and documentaries",
+    id: "long-form",
+    title: "Long Form Videos",
+    assets: [
+      { id: 1, image: project1, title: "Brand Documentary Series" },
+      { id: 2, image: project4, title: "Product Launch Film" },
+      { id: 3, image: project1, title: "Corporate Story" },
+      { id: 4, image: project4, title: "Creative Feature" },
+    ],
   },
   {
-    id: 2,
-    title: "Visual Identity Animations",
-    category: "Motion Visuals",
-    image: project2,
-    description: "Dynamic motion graphics and animated visual systems",
+    id: "motion-visuals",
+    title: "Motion Visuals",
+    assets: [
+      { id: 5, image: project2, title: "Visual Identity Animations" },
+      { id: 6, image: project2, title: "Brand Motion System" },
+      { id: 7, image: project2, title: "UI Animations" },
+      { id: 8, image: project2, title: "Logo Reveal" },
+    ],
   },
   {
-    id: 3,
-    title: "Social Media Reels",
-    category: "Short Form Content",
-    image: project3,
-    description: "Engaging short-form content optimized for social platforms",
-  },
-  {
-    id: 4,
-    title: "Product Launch Film",
-    category: "Long Form Videos",
-    image: project4,
-    description: "High-impact video content for product announcements",
+    id: "short-form",
+    title: "Short Form Content",
+    assets: [
+      { id: 9, image: project3, title: "Social Media Reels" },
+      { id: 10, image: project3, title: "Instagram Stories" },
+      { id: 11, image: project3, title: "TikTok Campaigns" },
+      { id: 12, image: project3, title: "YouTube Shorts" },
+    ],
   },
 ];
 
-const Portfolio = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "center" });
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
-
-  const scrollPrev = useCallback(() => {
-    if (emblaApi) emblaApi.scrollPrev();
-  }, [emblaApi]);
-
-  const scrollNext = useCallback(() => {
-    if (emblaApi) emblaApi.scrollNext();
-  }, [emblaApi]);
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-    setCanScrollPrev(emblaApi.canScrollPrev());
-    setCanScrollNext(emblaApi.canScrollNext());
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", onSelect);
-  }, [emblaApi, onSelect]);
+const CategorySlider = ({ category, index }: { category: typeof categories[0]; index: number }) => {
+  const [emblaRef] = useEmblaCarousel(
+    { loop: true, align: "start", dragFree: true },
+    [Autoplay({ delay: 4000 + index * 1000, stopOnInteraction: false })]
+  );
+  
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
 
   return (
-    <section id="work" className="py-24 md:py-32 bg-muted/30">
-      <div className="container mx-auto px-6">
-        <div className="max-w-2xl mb-16 animate-slide-up">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Selected Work</h2>
-          <p className="text-lg text-muted-foreground">
-            A curated collection of projects that showcase creativity, strategy, and innovation.
-          </p>
-        </div>
+    <motion.div 
+      ref={ref}
+      style={{ y, opacity }}
+      className="mb-20"
+    >
+      {/* Category Title */}
+      <h3 className="text-2xl md:text-3xl font-semibold mb-6 px-6 md:px-12 text-foreground">
+        {category.title}
+      </h3>
 
-        <div className="relative">
-          {/* Carousel */}
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-6">
-              {projects.map((project, index) => (
-                <div
-                  key={project.id}
-                  className="flex-[0_0_100%] md:flex-[0_0_80%] lg:flex-[0_0_70%] min-w-0"
-                >
-                  <div className="group relative overflow-hidden rounded-lg">
-                    <div className="aspect-[16/10] overflow-hidden bg-muted">
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                      />
-                    </div>
-
-                    {/* Desktop Hover Overlay */}
-                    <div className="hidden md:flex absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex-col justify-end p-8">
-                      <span
-                        className={`text-sm font-medium mb-2 ${
-                          index % 2 === 0 ? "text-accent" : "text-blue"
-                        }`}
-                      >
-                        {project.category}
-                      </span>
-                      <h3 className="text-3xl font-bold mb-2">{project.title}</h3>
-                      <p className="text-muted-foreground">{project.description}</p>
-                    </div>
-
-                    {/* Mobile Info */}
-                    <div className="md:hidden bg-background p-6 border-t border-border">
-                      <span
-                        className={`text-sm font-medium mb-2 block ${
-                          index % 2 === 0 ? "text-accent" : "text-blue"
-                        }`}
-                      >
-                        {project.category}
-                      </span>
-                      <h3 className="text-xl font-bold mb-2">{project.title}</h3>
-                      <p className="text-sm text-muted-foreground">{project.description}</p>
-                    </div>
-                  </div>
+      {/* Slider */}
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex gap-6 px-6 md:px-12">
+          {category.assets.map((asset) => (
+            <motion.div
+              key={asset.id}
+              className="flex-[0_0_85%] sm:flex-[0_0_60%] md:flex-[0_0_45%] lg:flex-[0_0_35%] xl:flex-[0_0_28%] min-w-0"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+            >
+              <div className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-500">
+                <div className="aspect-[4/5] overflow-hidden bg-gradient-to-br from-muted/50 to-muted">
+                  <img
+                    src={asset.image}
+                    alt={asset.title}
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                  />
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Navigation Buttons */}
-          <div className="flex items-center justify-center gap-4 mt-8">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={scrollPrev}
-              disabled={!canScrollPrev}
-              className="rounded-full"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </Button>
-
-            {/* Dots Indicator */}
-            <div className="flex gap-2">
-              {projects.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => emblaApi?.scrollTo(index)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    index === selectedIndex
-                      ? "w-8 bg-accent"
-                      : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                />
-              ))}
-            </div>
-
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={scrollNext}
-              disabled={!canScrollNext}
-              className="rounded-full"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </Button>
-          </div>
+                
+                {/* Subtle Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Title on Hover */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                  <p className="text-white font-medium text-lg">{asset.title}</p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const Portfolio = () => {
+  return (
+    <section 
+      id="work" 
+      className="py-24 md:py-32 bg-gradient-to-b from-white via-white/95 to-[#03045A]/5 relative overflow-hidden"
+    >
+      {/* Subtle Background Elements */}
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-primary/5 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-primary/5 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/4 pointer-events-none" />
+      
+      <div className="relative z-10">
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mb-20 px-6 md:px-12"
+        >
+          <h2 className="text-4xl md:text-6xl font-bold mb-4 text-foreground">Selected Work</h2>
+          <p className="text-lg md:text-xl text-muted-foreground font-light">
+            A curated collection of projects across video, motion, and content creation.
+          </p>
+        </motion.div>
+
+        {/* Category Sliders */}
+        {categories.map((category, index) => (
+          <CategorySlider key={category.id} category={category} index={index} />
+        ))}
       </div>
     </section>
   );
