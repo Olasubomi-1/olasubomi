@@ -1,5 +1,5 @@
-import { ArrowDown } from "lucide-react";
-import heroImage from "@/assets/hero-bg.jpg";
+import { ArrowRight, Mail } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Hero = () => {
   const scrollToWork = () => {
@@ -9,58 +9,68 @@ const Hero = () => {
     }
   };
 
+  const scrollToContact = () => {
+    const element = document.getElementById("contact");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#03045A]">
-      {/* Background Image with Gradient Overlay */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#03045A] via-[#03045A]/95 to-[#0a0e5f] z-10" />
-        <img
-          src={heroImage}
-          alt="Creative background"
-          className="w-full h-full object-cover opacity-10"
-        />
-        {/* Decorative Elements */}
-        <div className="absolute top-20 right-10 w-72 h-72 bg-white/5 rounded-full blur-3xl z-10" />
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-white/3 rounded-full blur-3xl z-10" />
-      </div>
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-white to-[#03045A]/5">
+      {/* Abstract Shape */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-[#03045A]/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-[#03045A]/5 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
 
       {/* Content */}
-      <div className="container mx-auto px-6 z-20 text-center">
-        <div className="max-w-5xl mx-auto space-y-12 animate-fade-in">
-          <div className="space-y-6">
-            <p className="text-sm md:text-base text-white/60 tracking-[0.3em] uppercase font-light">
-              Hi, I am
-            </p>
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-white leading-none">
-              Jason
-            </h1>
-          </div>
-          
-          <div className="space-y-6 max-w-3xl mx-auto">
-            <p className="text-xl md:text-3xl text-white font-light leading-relaxed">
-              I design motion that <span className="font-semibold italic">feels alive</span>, blending design, timing, and storytelling in every frame.
-            </p>
-            <p className="text-base md:text-lg text-white/80 leading-relaxed font-light max-w-2xl mx-auto">
-              My work turns products into experiences and messages into visuals that catch eyes and keep them, helping brands show their value without saying a word.
-            </p>
-          </div>
+      <div className="container mx-auto px-6 z-10">
+        <div className="max-w-4xl mx-auto">
+          <div className="space-y-8 animate-fade-in">
+            {/* Headline */}
+            <div className="space-y-4">
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground leading-[1.1]">
+                Visual Creator.<br />
+                <span className="text-primary">Motion Designer.</span>
+              </h1>
+            </div>
 
-          <div className="pt-8">
-            <button
-              onClick={scrollToWork}
-              className="group inline-flex items-center gap-3 px-8 py-4 text-sm font-medium tracking-wider uppercase text-white border border-white/20 hover:bg-white hover:text-[#03045A] transition-all duration-300"
-            >
-              <span>Explore Work</span>
-              <ArrowDown className="w-4 h-4 group-hover:translate-y-1 transition-transform" />
-            </button>
-          </div>
-        </div>
-      </div>
+            {/* Sub-text */}
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl font-light">
+              I design motion that feels alive, blending design, timing, and storytelling 
+              to create visuals that captivate and connect.
+            </p>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 animate-bounce">
-        <div className="w-6 h-10 border border-white/20 rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-3 bg-white/40 rounded-full animate-pulse" />
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap items-center gap-4 pt-4">
+              <Button 
+                onClick={scrollToWork}
+                size="lg"
+                className="group text-base"
+              >
+                View My Work
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              
+              <Button 
+                onClick={scrollToContact}
+                variant="outline"
+                size="lg"
+                className="text-base"
+              >
+                <Mail className="w-4 h-4 mr-2" />
+                Get in Touch
+              </Button>
+            </div>
+
+            {/* Profile Image Placeholder - Abstract Circle */}
+            <div className="pt-12 flex justify-center">
+              <div className="relative w-24 h-24 md:w-32 md:h-32">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary/60 rounded-full animate-pulse" />
+                <div className="absolute inset-2 bg-background rounded-full" />
+                <div className="absolute inset-4 bg-gradient-to-br from-primary/20 to-primary/40 rounded-full" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
