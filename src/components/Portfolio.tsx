@@ -6,6 +6,7 @@ import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
+import visualIdentityVideo from "@/assets/visual-identity.mp4";
 
 const categories = [
   {
@@ -22,7 +23,7 @@ const categories = [
     id: "motion-visuals",
     title: "Motion Visuals",
     assets: [
-      { id: 5, image: project2, title: "Visual Identity Animations" },
+      { id: 5, video: visualIdentityVideo, title: "Visual Identity Animations" },
       { id: 6, image: project2, title: "Brand Motion System" },
       { id: 7, image: project2, title: "UI Animations" },
       { id: 8, image: project2, title: "Logo Reveal" },
@@ -78,11 +79,22 @@ const CategorySlider = ({ category, index }: { category: typeof categories[0]; i
             >
               <div className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-500">
                 <div className="aspect-[4/5] overflow-hidden bg-gradient-to-br from-muted/50 to-muted">
-                  <img
-                    src={asset.image}
-                    alt={asset.title}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                  />
+                  {asset.video ? (
+                    <video
+                      src={asset.video}
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    />
+                  ) : (
+                    <img
+                      src={asset.image}
+                      alt={asset.title}
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                    />
+                  )}
                 </div>
                 
                 {/* Subtle Overlay */}
