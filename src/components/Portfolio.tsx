@@ -25,7 +25,7 @@ const categories = [
     title: "Motion Visuals",
     assets: [
       { id: 5, video: visualIdentityVideo, title: "Visual Identity Animations" },
-      { id: 6, video: productAnimationVideo, title: "Product Animation" },
+      { id: 6, iframe: "https://drive.google.com/file/d/1ORKbQXyYFPAV51Qoyt0WmXkgrp6qDKk3/preview", title: "Product Animation" },
       { id: 7, image: project2, title: "UI Animations" },
       { id: 8, image: project2, title: "Logo Reveal" },
     ],
@@ -80,7 +80,14 @@ const CategorySlider = ({ category, index }: { category: typeof categories[0]; i
             >
               <div className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-500">
                 <div className="aspect-[4/5] overflow-hidden bg-gradient-to-br from-muted/50 to-muted">
-                  {asset.video ? (
+                  {asset.iframe ? (
+                    <iframe
+                      src={asset.iframe}
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                      allow="autoplay"
+                      style={{ border: 'none' }}
+                    />
+                  ) : asset.video ? (
                     <video
                       src={asset.video}
                       autoPlay
