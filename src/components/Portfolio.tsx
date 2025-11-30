@@ -7,6 +7,7 @@ import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
 import visualIdentityVideo from "@/assets/visual-identity.mp4";
+import productAnimationVideo from "@/assets/product-animation.mp4";
 
 const categories = [
   {
@@ -24,7 +25,7 @@ const categories = [
     title: "Motion Visuals",
     assets: [
       { id: 5, video: visualIdentityVideo, title: "Visual Identity Animations" },
-      { id: 6, image: project2, title: "Product Animation" },
+      { id: 6, video: productAnimationVideo, title: "Product Animation" },
       { id: 7, image: project2, title: "UI Animations" },
       { id: 8, image: project2, title: "Logo Reveal" },
     ],
