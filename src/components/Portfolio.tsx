@@ -26,7 +26,7 @@ const categories = [
     assets: [
       { id: 5, video: visualIdentityVideo, title: "Visual Identity Animations" },
       { id: 6, iframe: "https://drive.google.com/file/d/1hqczKetFN1WoRQrYHZAl5C4fUpmYN9C4/preview?autoplay=1&mute=1", title: "Product Animation" },
-      { id: 7, image: project2, title: "UI Animations" },
+      { id: 7, iframe: "https://drive.google.com/file/d/1ORKbQXyYFPAV51Qoyt0WmXkgrp6qDKk3/preview?autoplay=1&mute=1&loop=1", title: "Sass Style animation" },
       { id: 8, image: project2, title: "Logo Reveal" },
     ],
   },
