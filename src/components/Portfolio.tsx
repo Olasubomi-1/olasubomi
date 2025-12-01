@@ -36,9 +36,9 @@ const categories = [
     title: "Short Form Content",
     assets: [
       { id: 9, image: project3, title: "Social Media Reels" },
-      { id: 10, image: project3, title: "Instagram Stories" },
-      { id: 11, image: project3, title: "TikTok Campaigns" },
-      { id: 12, image: project3, title: "YouTube Shorts" },
+      { id: 10, iframe: "https://www.youtube.com/embed/Cb6wH9OwO8M?autoplay=1&mute=1&loop=1&playlist=Cb6wH9OwO8M", title: "Instagram Stories" },
+      { id: 11, iframe: "https://www.youtube.com/embed/JkaPTTuwDl0?autoplay=1&mute=1&loop=1&playlist=JkaPTTuwDl0", title: "TikTok Campaigns" },
+      { id: 12, iframe: "https://www.youtube.com/embed/JkaPTTuwDl0?autoplay=1&mute=1&loop=1&playlist=JkaPTTuwDl0", title: "YouTube Shorts" },
     ],
   },
 ];
@@ -81,7 +81,15 @@ const CategorySlider = ({ category, index }: { category: typeof categories[0]; i
             >
               <div className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-500">
                 <div className="aspect-[4/5] overflow-hidden bg-gradient-to-br from-muted/50 to-muted">
-                  {asset.video ? (
+                  {asset.iframe ? (
+                    <iframe
+                      src={asset.iframe}
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                      allow="autoplay; encrypted-media"
+                      allowFullScreen
+                      style={{ border: 'none' }}
+                    />
+                  ) : asset.video ? (
                     <video
                       src={asset.video}
                       autoPlay
