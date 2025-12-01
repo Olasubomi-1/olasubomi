@@ -1,6 +1,6 @@
 const About = () => {
   return (
-    <section id="about" className="py-24 md:py-32">
+    <section id="about" className="py-24 md:py-32 bg-card/30">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div className="space-y-6 animate-slide-up">
@@ -25,12 +25,12 @@ const About = () => {
           </div>
 
           <div className="space-y-8 animate-slide-up" style={{ animationDelay: "200ms" }}>
-            <div className="border-l-2 border-blue pl-6 space-y-2">
-              <div className="text-5xl md:text-6xl font-bold text-blue">6+</div>
+            <div className="border-l-4 border-primary pl-6 space-y-2 glass p-6 rounded-lg hover-lift">
+              <div className="text-5xl md:text-6xl font-bold text-primary">6+</div>
               <div className="text-muted-foreground">Years Experience</div>
             </div>
-            <div className="border-l-2 border-accent pl-6 space-y-2">
-              <div className="text-5xl md:text-6xl font-bold text-accent">100+</div>
+            <div className="border-l-4 border-blue pl-6 space-y-2 glass p-6 rounded-lg hover-lift">
+              <div className="text-5xl md:text-6xl font-bold text-blue">100+</div>
               <div className="text-muted-foreground">Projects Delivered</div>
             </div>
           </div>

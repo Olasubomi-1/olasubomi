@@ -25,7 +25,7 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-24 md:py-32 bg-muted/30">
+    <section id="services" className="py-24 md:py-32 bg-gradient-to-b from-card/30 to-background">
       <div className="container mx-auto px-6">
         <div className="max-w-2xl mb-16 animate-slide-up">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Services</h2>
@@ -41,17 +41,17 @@ const Services = () => {
             return (
               <div
                 key={service.title}
-                className={`group p-8 rounded-lg border border-border transition-all duration-300 animate-slide-up ${
-                  isBlue ? "hover:border-blue" : "hover:border-accent"
+                className={`group p-8 rounded-lg border border-border/50 glass transition-all duration-300 animate-slide-up hover-lift ${
+                  isBlue ? "hover:border-blue" : "hover:border-primary"
                 }`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-6 transition-colors ${
                   isBlue 
                     ? "bg-blue/10 group-hover:bg-blue/20" 
-                    : "bg-accent/10 group-hover:bg-accent/20"
+                    : "bg-primary/10 group-hover:bg-primary/20"
                 }`}>
-                  <Icon className={`w-6 h-6 ${isBlue ? "text-blue" : "text-accent"}`} />
+                  <Icon className={`w-6 h-6 ${isBlue ? "text-blue" : "text-primary"}`} />
                 </div>
                 <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
                 <p className="text-muted-foreground leading-relaxed">{service.description}</p>

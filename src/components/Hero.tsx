@@ -17,10 +17,10 @@ const Hero = () => {
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-white to-[#03045A]/5">
-      {/* Abstract Shape */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-[#03045A]/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-[#03045A]/5 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-background via-background to-primary/5">
+      {/* Abstract Glow Effects */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 animate-glow" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-primary/10 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
 
       {/* Content */}
       <div className="container mx-auto px-6 z-10">
@@ -30,7 +30,7 @@ const Hero = () => {
             <div className="space-y-4">
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground leading-[1.1]">
                 Visual Creator.<br />
-                <span className="text-primary">Motion Designer.</span>
+                <span className="bg-gradient-to-r from-primary to-blue bg-clip-text text-transparent">Motion Designer.</span>
               </h1>
             </div>
 
@@ -45,7 +45,7 @@ const Hero = () => {
               <Button 
                 onClick={scrollToWork}
                 size="lg"
-                className="group text-base"
+                className="group text-base hover-lift shadow-lg hover:shadow-glow"
               >
                 View My Work
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -55,7 +55,7 @@ const Hero = () => {
                 onClick={scrollToContact}
                 variant="outline"
                 size="lg"
-                className="text-base"
+                className="text-base glass border-border/50 hover:border-primary/50"
               >
                 <Mail className="w-4 h-4 mr-2" />
                 Get in Touch
@@ -64,10 +64,10 @@ const Hero = () => {
 
             {/* Profile Image Placeholder - Abstract Circle */}
             <div className="pt-12 flex justify-center">
-              <div className="relative w-24 h-24 md:w-32 md:h-32">
-                <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary/60 rounded-full animate-pulse" />
+              <div className="relative w-24 h-24 md:w-32 md:h-32 animate-scale-in" style={{ animationDelay: "0.3s" }}>
+                <div className="absolute inset-0 bg-gradient-to-br from-primary to-blue rounded-full animate-glow" />
                 <div className="absolute inset-2 bg-background rounded-full" />
-                <div className="absolute inset-4 bg-gradient-to-br from-primary/20 to-primary/40 rounded-full" />
+                <div className="absolute inset-4 bg-gradient-to-br from-primary/20 to-blue/20 rounded-full" />
               </div>
             </div>
           </div>
