@@ -8,6 +8,7 @@ import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
 import visualIdentityVideo from "@/assets/visual-identity.mp4";
 import productAnimationVideo from "@/assets/product-animation.mp4";
+import sassAnimationVideo from "@/assets/sass-animation.mp4";
 
 const categories = [
   {
@@ -26,7 +27,7 @@ const categories = [
     assets: [
       { id: 5, video: visualIdentityVideo, title: "Visual Identity Animations" },
       { id: 6, video: productAnimationVideo, title: "Product Animation" },
-      { id: 7, iframe: "https://drive.google.com/file/d/1ORKbQXyYFPAV51Qoyt0WmXkgrp6qDKk3/preview?autoplay=1&mute=1&loop=1", title: "Sass Style animation" },
+      { id: 7, video: sassAnimationVideo, title: "Sass Style animation" },
       { id: 8, image: project2, title: "Logo Reveal" },
     ],
   },
@@ -80,14 +81,7 @@ const CategorySlider = ({ category, index }: { category: typeof categories[0]; i
             >
               <div className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-500">
                 <div className="aspect-[4/5] overflow-hidden bg-gradient-to-br from-muted/50 to-muted">
-                  {asset.iframe ? (
-                    <iframe
-                      src={asset.iframe}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-                      allow="autoplay"
-                      style={{ border: 'none' }}
-                    />
-                  ) : asset.video ? (
+                  {asset.video ? (
                     <video
                       src={asset.video}
                       autoPlay
