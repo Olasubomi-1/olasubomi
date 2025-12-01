@@ -8,85 +8,90 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 239 93% 18%;
-
-    --card: 0 0% 98%;
-    --card-foreground: 239 93% 18%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 239 93% 18%;
-
-    --primary: 239 93% 18%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 239 80% 95%;
-    --secondary-foreground: 239 93% 18%;
-
-    --muted: 239 30% 96%;
-    --muted-foreground: 239 40% 40%;
-
-    --accent: 239 93% 18%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
-
-    --border: 239 30% 88%;
-    --input: 239 30% 88%;
-    --ring: 239 93% 18%;
-
-    --radius: 0.5rem;
-
-    /* Custom portfolio tokens */
-    --blue: 239 93% 18%;
-    --blue-foreground: 0 0% 100%;
-    --ocean: 239 93% 25%;
-    --ocean-foreground: 0 0% 100%;
-    --dark: 239 93% 18%;
-    --dark-foreground: 0 0% 100%;
-    
-    /* Animations */
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-fast: all 0.2s ease;
-  }
-
-  .dark {
-    --background: 239 93% 8%;
+    /* Deep dark blue background - #0A0F1F equivalent */
+    --background: 225 50% 8%;
     --foreground: 0 0% 98%;
 
-    --card: 239 80% 12%;
+    /* Cards with subtle elevation */
+    --card: 225 40% 12%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 239 80% 12%;
+    --popover: 225 40% 12%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 239 93% 35%;
+    /* Soft blue accent - #1C2EFD inspired */
+    --primary: 230 95% 55%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 239 70% 18%;
+    /* Subtle secondary surfaces */
+    --secondary: 225 40% 15%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 239 60% 15%;
-    --muted-foreground: 239 30% 70%;
+    /* Muted backgrounds and text */
+    --muted: 225 35% 18%;
+    --muted-foreground: 220 15% 65%;
 
-    --accent: 239 93% 35%;
+    /* Accent highlighting */
+    --accent: 230 95% 55%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 63% 31%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 239 50% 20%;
-    --input: 239 50% 20%;
-    --ring: 239 93% 35%;
-    
+    /* Borders and inputs with soft contrast */
+    --border: 225 30% 22%;
+    --input: 225 30% 22%;
+    --ring: 230 95% 55%;
+
+    --radius: 0.75rem;
+
     /* Custom portfolio tokens */
-    --blue: 239 93% 35%;
+    --blue: 230 95% 55%;
     --blue-foreground: 0 0% 100%;
-    --ocean: 239 93% 25%;
+    --ocean: 230 80% 45%;
     --ocean-foreground: 0 0% 100%;
-    --dark: 239 93% 8%;
-    --dark-foreground: 0 0% 100%;
+    --dark: 225 50% 8%;
+    --dark-foreground: 0 0% 98%;
+    
+    /* Glass-like overlay */
+    --glass: 225 40% 15% / 0.6;
+    --glass-border: 0 0% 100% / 0.1;
+    
+    /* Gradients */
+    --gradient-dark: linear-gradient(180deg, hsl(225 50% 8%) 0%, hsl(225 45% 10%) 100%);
+    --gradient-subtle: linear-gradient(135deg, hsl(230 95% 55% / 0.1) 0%, transparent 100%);
+    
+    /* Animations - Apple-style smooth */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    /* Shadows with soft blue glow */
+    --shadow-sm: 0 2px 8px hsl(225 50% 5% / 0.4);
+    --shadow-md: 0 4px 16px hsl(225 50% 5% / 0.5);
+    --shadow-lg: 0 8px 32px hsl(225 50% 5% / 0.6);
+    --shadow-glow: 0 0 40px hsl(230 95% 55% / 0.2);
+  }
+
+  /* Light mode override (keeping dark as default) */
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 225 50% 8%;
+    --card: 0 0% 98%;
+    --card-foreground: 225 50% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 225 50% 8%;
+    --primary: 230 95% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 15% 95%;
+    --secondary-foreground: 225 50% 8%;
+    --muted: 220 15% 96%;
+    --muted-foreground: 220 15% 40%;
+    --accent: 230 95% 55%;
+    --accent-foreground: 0 0% 100%;
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 230 95% 55%;
   }
 }
 
@@ -110,12 +115,42 @@ All colors MUST be HSL.
     text-wrap: balance;
   }
   
+  /* Glass morphism effect */
+  .glass {
+    background: hsl(var(--glass));
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--glass-border));
+  }
+  
+  /* Smooth animations */
   .animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
   }
   
   .animate-slide-up {
-    animation: slideUp 0.8s ease-out forwards;
+    animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  }
+  
+  /* Hover effects */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .hover-glow {
+    transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .hover-glow:hover {
+    box-shadow: var(--shadow-glow);
   }
 }
 
@@ -136,5 +171,16 @@ All colors MUST be HSL.
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }

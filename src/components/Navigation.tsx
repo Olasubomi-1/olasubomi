@@ -31,13 +31,13 @@ const Navigation = () => {
 
   return (
     <nav
-      className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-[#03045A]/10"
+      className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/50 backdrop-blur-xl"
     >
       <div className="container mx-auto px-6 py-5">
         <div className="flex items-center justify-between">
           <button
             onClick={() => scrollToSection("hero")}
-            className="text-2xl font-bold tracking-tight text-[#03045A] hover:opacity-70 transition-opacity"
+            className="text-2xl font-bold tracking-tight text-primary hover:opacity-70 transition-opacity"
           >
             SA
           </button>
@@ -48,7 +48,7 @@ const Navigation = () => {
               <button
                 key={link.id}
                 onClick={() => scrollToSection(link.id)}
-                className="text-sm font-medium text-[#03045A]/70 hover:text-[#03045A] transition-colors tracking-wide uppercase"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors tracking-wide uppercase"
               >
                 {link.name}
               </button>
@@ -59,7 +59,7 @@ const Navigation = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden text-[#03045A] hover:bg-[#03045A]/5"
+            className="md:hidden text-foreground hover:bg-primary/10"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X /> : <Menu />}
@@ -68,13 +68,13 @@ const Navigation = () => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 animate-fade-in border-t border-[#03045A]/10 pt-4">
+          <div className="md:hidden mt-4 pb-4 animate-fade-in border-t border-border/50 pt-4">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
                 <button
                   key={link.id}
                   onClick={() => scrollToSection(link.id)}
-                  className="text-left text-sm font-medium text-[#03045A]/70 hover:text-[#03045A] transition-colors tracking-wide uppercase"
+                  className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors tracking-wide uppercase"
                 >
                   {link.name}
                 </button>

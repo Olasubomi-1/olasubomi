@@ -79,8 +79,8 @@ const CategorySlider = ({ category, index }: { category: typeof categories[0]; i
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <div className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-shadow duration-500">
-                <div className="aspect-[4/5] overflow-hidden bg-gradient-to-br from-muted/50 to-muted">
+              <div className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover-lift border border-border/50">
+                <div className="aspect-[4/5] overflow-hidden bg-gradient-to-br from-card to-muted">
                   {asset.iframe ? (
                     <iframe
                       src={asset.iframe}
@@ -108,11 +108,11 @@ const CategorySlider = ({ category, index }: { category: typeof categories[0]; i
                 </div>
                 
                 {/* Subtle Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 {/* Title on Hover */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                  <p className="text-white font-medium text-lg">{asset.title}</p>
+                  <p className="text-foreground font-medium text-lg drop-shadow-lg">{asset.title}</p>
                 </div>
               </div>
             </motion.div>
@@ -127,11 +127,11 @@ const Portfolio = () => {
   return (
     <section 
       id="work" 
-      className="py-24 md:py-32 bg-gradient-to-b from-white via-white/95 to-[#03045A]/5 relative overflow-hidden"
+      className="py-24 md:py-32 bg-gradient-to-b from-background via-card/30 to-background relative overflow-hidden"
     >
       {/* Subtle Background Elements */}
-      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-primary/5 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-primary/5 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/4 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-gradient-to-bl from-primary/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gradient-to-tr from-blue/10 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/4 pointer-events-none" />
       
       <div className="relative z-10">
         {/* Header */}
