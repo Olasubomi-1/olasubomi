@@ -23,7 +23,7 @@ const Contact = () => {
               className="hover-lift shadow-lg hover:shadow-glow"
               asChild
             >
-              <a href="mailto:hello@example.com" className="flex items-center gap-2">
+              <a href="mailto:olasubomiafolayan@gmail.com" className="flex items-center gap-2">
                 <Mail className="w-5 h-5" />
                 Get in Touch
               </a>
@@ -32,7 +32,7 @@ const Contact = () => {
 
           <div className="flex gap-6 justify-center pt-8">
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/olasubomi-afolayan001/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-12 h-12 rounded-full border border-border/50 flex items-center justify-center hover:border-primary hover:text-primary transition-all hover-lift glass"
