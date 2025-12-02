@@ -9,6 +9,8 @@ import project4 from "@/assets/project-4.jpg";
 import visualIdentityVideo from "@/assets/visual-identity.mp4";
 import productAnimationVideo from "@/assets/product-animation.mp4";
 import sassAnimationVideo from "@/assets/sass-animation.mp4";
+import logoVeedVideo from "@/assets/logo-veed.mp4";
+import lastnVideo from "@/assets/lastn.mp4";
 
 const categories = [
   {
@@ -17,7 +19,7 @@ const categories = [
     assets: [
       { id: 1, image: project1, title: "Brand Documentary Series" },
       { id: 2, image: project4, title: "Product Launch Film" },
-      { id: 3, image: project1, title: "Corporate Story" },
+      { id: 3, video: lastnVideo, title: "Corporate Story" },
       { id: 4, image: project4, title: "Creative Feature" },
     ],
   },
@@ -28,7 +30,7 @@ const categories = [
       { id: 5, video: visualIdentityVideo, title: "Visual Identity Animations" },
       { id: 6, video: productAnimationVideo, title: "Product Animation" },
       { id: 7, video: sassAnimationVideo, title: "Sass Style animation" },
-      { id: 8, image: project2, title: "Logo Reveal" },
+      { id: 8, video: logoVeedVideo, title: "Logo Reveal" },
     ],
   },
   {
