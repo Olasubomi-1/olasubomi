@@ -1,7 +1,9 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { X } from "lucide-react";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
@@ -51,6 +53,8 @@ const CategorySlider = ({ category, index }: { category: typeof categories[0]; i
     [Autoplay({ delay: 4000 + index * 1000, stopOnInteraction: false })]
   );
   
+  const [expandedMedia, setExpandedMedia] = useState<{ src: string; type: 'video' | 'iframe' } | null>(null);
+  
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -59,6 +63,14 @@ const CategorySlider = ({ category, index }: { category: typeof categories[0]; i
   
   const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  
+  const handleMediaClick = (asset: typeof category.assets[0]) => {
+    if ('video' in asset && asset.video) {
+      setExpandedMedia({ src: asset.video, type: 'video' });
+    } else if ('iframe' in asset && asset.iframe) {
+      setExpandedMedia({ src: asset.iframe, type: 'iframe' });
+    }
+  };
 
   return (
     <motion.div 
@@ -81,12 +93,15 @@ const CategorySlider = ({ category, index }: { category: typeof categories[0]; i
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <div className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover-lift border border-border/50">
+              <div 
+                className="group relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 hover-lift border border-border/50 cursor-pointer"
+                onClick={() => handleMediaClick(asset)}
+              >
                 <div className="aspect-[4/5] overflow-hidden bg-gradient-to-br from-card to-muted">
                   {asset.iframe ? (
                     <iframe
                       src={asset.iframe}
-                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 pointer-events-none"
                       allow="autoplay; encrypted-media"
                       allowFullScreen
                       style={{ border: 'none' }}
@@ -121,6 +136,40 @@ const CategorySlider = ({ category, index }: { category: typeof categories[0]; i
           ))}
         </div>
       </div>
+      
+      {/* Expanded Media Dialog */}
+      <Dialog open={!!expandedMedia} onOpenChange={() => setExpandedMedia(null)}>
+        <DialogContent className="max-w-5xl w-[95vw] h-[90vh] p-0 bg-background/95 backdrop-blur-xl border-border/50">
+          <button
+            onClick={() => setExpandedMedia(null)}
+            className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 flex items-center justify-center hover:bg-background transition-colors"
+          >
+            <X className="w-5 h-5" />
+          </button>
+          
+          <div className="w-full h-full flex items-center justify-center p-6">
+            {expandedMedia?.type === 'video' && (
+              <video
+                src={expandedMedia.src}
+                autoPlay
+                loop
+                controls
+                playsInline
+                className="max-w-full max-h-full rounded-2xl shadow-2xl"
+              />
+            )}
+            {expandedMedia?.type === 'iframe' && (
+              <iframe
+                src={expandedMedia.src.replace('mute=1', 'mute=0')}
+                className="w-full h-full rounded-2xl"
+                allow="autoplay; encrypted-media"
+                allowFullScreen
+                style={{ border: 'none' }}
+              />
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </motion.div>
   );
 };
