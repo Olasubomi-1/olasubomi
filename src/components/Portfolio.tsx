@@ -45,6 +45,16 @@ const categories = [
       { id: 12, iframe: "https://www.youtube.com/embed/JkaPTTuwDl0?start=8&autoplay=1&mute=1&loop=1&playlist=JkaPTTuwDl0", title: "YouTube Shorts" },
     ],
   },
+  {
+    id: "creative-design",
+    title: "Creative Design",
+    assets: [
+      { id: 13, image: project1, title: "Brand Identity System" },
+      { id: 14, image: project2, title: "Visual Concepts" },
+      { id: 15, image: project3, title: "Digital Artwork" },
+      { id: 16, image: project4, title: "Creative Direction" },
+    ],
+  },
 ];
 
 const CategorySlider = ({ category, index }: { category: typeof categories[0]; index: number }) => {
