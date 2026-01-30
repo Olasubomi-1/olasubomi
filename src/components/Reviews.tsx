@@ -4,38 +4,33 @@ import { Quote } from "lucide-react";
 const reviews = [
   {
     id: 1,
-    name: "Sarah Chen",
-    role: "Marketing Director",
-    project: "Brand Campaign",
-    testimonial: "Afolayan transformed our brand vision into stunning motion graphics. The attention to detail and creative execution exceeded all expectations.",
+    name: "TAWK CRYPTO",
+    role: "Founder",
+    testimonial: "Clean work, fast delivery. Exactly what we needed.",
   },
   {
     id: 2,
-    name: "Michael Roberts",
-    role: "CEO",
-    project: "Product Launch",
-    testimonial: "Working with Afolayan was seamless. Every frame tells a story, and the final videos drove incredible engagement for our launch.",
+    name: "VODEE STUDIO",
+    role: "Creative Director",
+    testimonial: "Professional and easy to work with. The quality speaks for itself.",
   },
   {
     id: 3,
-    name: "Emma Thompson",
-    role: "Creative Lead",
-    project: "Social Media Content",
-    testimonial: "The short-form content created for our campaigns was nothing short of exceptional. Fast turnaround, premium quality, and perfect storytelling.",
+    name: "Chinedu Okafor",
+    role: "CEO",
+    testimonial: "Solid communication throughout. Delivered ahead of schedule with no revisions needed.",
   },
   {
     id: 4,
-    name: "David Park",
-    role: "Founder",
-    project: "Visual Identity",
-    testimonial: "Afolayan brought our brand to life with motion design that feels fresh and authentic. Truly world-class work.",
+    name: "Marcus Weber",
+    role: "Brand Manager",
+    testimonial: "High-quality visuals and quick turnaround. Will definitely work together again.",
   },
   {
     id: 5,
-    name: "Lisa Anderson",
-    role: "Head of Content",
-    project: "Documentary Series",
-    testimonial: "The long-form content exceeded our expectations. Every second is purposeful, visually stunning, and emotionally engaging.",
+    name: "Elena Kowalski",
+    role: "Marketing Lead",
+    testimonial: "Clear, polished, and professional. Made the whole process smooth.",
   },
 ];
 
@@ -98,9 +93,6 @@ const Reviews = () => {
                   </h4>
                   <p className="text-muted-foreground text-sm">
                     {review.role}
-                  </p>
-                  <p className="text-primary/80 text-sm mt-1 font-medium">
-                    {review.project}
                   </p>
                 </div>
               </div>
