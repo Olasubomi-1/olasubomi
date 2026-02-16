@@ -1,78 +1,111 @@
 import { ArrowRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   const scrollToWork = () => {
-    const element = document.getElementById("work");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
   };
 
   const scrollToContact = () => {
-    const element = document.getElementById("contact");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-background via-background to-primary/5">
-      {/* Abstract Glow Effects */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 animate-glow" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-primary/10 to-transparent rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      {/* Layered background */}
+      <div className="absolute inset-0 bg-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] via-transparent to-background" />
+      
+      {/* Soft radial glow */}
+      <div className="absolute top-[-20%] right-[-10%] w-[700px] h-[700px] bg-primary/[0.07] rounded-full blur-[120px]" />
+      <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-ocean/[0.05] rounded-full blur-[100px]" />
+      
+      {/* Grid lines (subtle) */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: 'linear-gradient(hsl(0 0% 100%) 1px, transparent 1px), linear-gradient(90deg, hsl(0 0% 100%) 1px, transparent 1px)',
+        backgroundSize: '80px 80px'
+      }} />
 
       {/* Content */}
       <div className="container mx-auto px-6 z-10">
-        <div className="max-w-4xl mx-auto">
-          <div className="space-y-8 animate-fade-in">
+        <div className="max-w-5xl mx-auto">
+          <motion.div 
+            className="space-y-10"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            {/* Tag */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-border/60 text-xs font-medium tracking-widest uppercase text-muted-foreground font-body">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                Available for projects
+              </span>
+            </motion.div>
+
             {/* Headline */}
-            <div className="space-y-4">
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight text-foreground leading-[1.1]">
-                Visual Creator.<br />
-                <span className="bg-gradient-to-r from-primary to-blue bg-clip-text text-transparent">Motion Designer.</span>
+            <motion.div 
+              className="space-y-2"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+            >
+              <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-foreground leading-[0.95]">
+                Visual Creator
               </h1>
-            </div>
+              <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.95] text-gradient">
+                Motion Designer
+              </h1>
+            </motion.div>
 
             {/* Sub-text */}
-            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl font-light">
-              I design motion that feels alive, blending design, timing, and storytelling 
+            <motion.p 
+              className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl font-body"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6, duration: 0.6 }}
+            >
+              I design motion that feels alive — blending design, timing, and storytelling 
               to create visuals that captivate and connect.
-            </p>
+            </motion.p>
 
             {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-4">
+            <motion.div 
+              className="flex flex-wrap items-center gap-4 pt-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+            >
               <Button 
                 onClick={scrollToWork}
                 size="lg"
-                className="group text-base hover-lift shadow-lg hover:shadow-glow"
+                className="group text-sm tracking-wide hover-lift shadow-lg hover:shadow-glow rounded-full px-8"
               >
                 View My Work
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
               </Button>
               
               <Button 
                 onClick={scrollToContact}
                 variant="outline"
                 size="lg"
-                className="text-base glass border-border/50 hover:border-primary/50"
+                className="text-sm tracking-wide glass border-border/40 hover:border-primary/40 rounded-full px-8"
               >
-                <Mail className="w-4 h-4 mr-2" />
+                <Mail className="w-4 h-4 mr-1" />
                 Get in Touch
               </Button>
-            </div>
-
-            {/* Profile Image Placeholder - Abstract Circle */}
-            <div className="pt-12 flex justify-center">
-              <div className="relative w-24 h-24 md:w-32 md:h-32 animate-scale-in" style={{ animationDelay: "0.3s" }}>
-                <div className="absolute inset-0 bg-gradient-to-br from-primary to-blue rounded-full animate-glow" />
-                <div className="absolute inset-2 bg-background rounded-full" />
-                <div className="absolute inset-4 bg-gradient-to-br from-primary/20 to-blue/20 rounded-full" />
-              </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
+
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
     </section>
   );
 };

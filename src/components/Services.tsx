@@ -1,4 +1,5 @@
 import { Video, Sparkles, Zap, Film } from "lucide-react";
+import { motion } from "framer-motion";
 
 const services = [
   {
@@ -25,37 +26,43 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="services" className="py-24 md:py-32 bg-gradient-to-b from-card/30 to-background">
-      <div className="container mx-auto px-6">
-        <div className="max-w-2xl mb-16 animate-slide-up">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Services</h2>
-          <p className="text-lg text-muted-foreground">
+    <section id="services" className="py-28 md:py-36 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/20 to-background" />
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.div 
+          className="max-w-3xl mb-20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">Services</h2>
+          <p className="text-base md:text-lg text-muted-foreground font-body">
             Professional video content creation tailored to elevate your brand and captivate your audience.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((service, index) => {
             const Icon = service.icon;
-            const isBlue = index % 2 === 1;
             return (
-              <div
+              <motion.div
                 key={service.title}
-                className={`group p-8 rounded-lg border border-border/50 glass transition-all duration-300 animate-slide-up hover-lift ${
-                  isBlue ? "hover:border-blue" : "hover:border-primary"
-                }`}
-                style={{ animationDelay: `${index * 100}ms` }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="group"
               >
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-6 transition-colors ${
-                  isBlue 
-                    ? "bg-blue/10 group-hover:bg-blue/20" 
-                    : "bg-primary/10 group-hover:bg-primary/20"
-                }`}>
-                  <Icon className={`w-6 h-6 ${isBlue ? "text-blue" : "text-primary"}`} />
+                <div className="glass border border-border/30 rounded-2xl p-8 md:p-10 h-full hover-lift transition-all duration-500 hover:border-primary/20">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/15 transition-colors duration-300">
+                    <Icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold mb-3 tracking-tight">{service.title}</h3>
+                  <p className="text-muted-foreground font-body leading-relaxed text-sm md:text-base">{service.description}</p>
                 </div>
-                <h3 className="text-2xl font-bold mb-4">{service.title}</h3>
-                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
-              </div>
+              </motion.div>
             );
           })}
         </div>
