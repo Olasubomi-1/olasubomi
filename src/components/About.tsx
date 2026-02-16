@@ -1,13 +1,24 @@
+import { motion } from "framer-motion";
+
 const About = () => {
   return (
-    <section id="about" className="py-24 md:py-32 bg-card/30">
-      <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="space-y-6 animate-slide-up">
-            <h2 className="text-4xl md:text-5xl font-bold">
-              Bringing Stories to Life Through Visuals
+    <section id="about" className="py-28 md:py-36 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-card/40 via-background to-background" />
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+          <motion.div 
+            className="space-y-8"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
+              Bringing Stories<br />
+              <span className="text-gradient">to Life</span>
             </h2>
-            <div className="space-y-4 text-lg text-muted-foreground">
+            <div className="space-y-5 text-base md:text-lg text-muted-foreground font-body leading-relaxed">
               <p>
                 As a visual creator, I specialize in crafting compelling video content that resonates. 
                 From long-form documentaries to scroll-stopping social media content, I create visuals 
@@ -22,18 +33,28 @@ const About = () => {
                 in the power of visual storytelling to inspire action and create lasting impressions.
               </p>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="space-y-8 animate-slide-up" style={{ animationDelay: "200ms" }}>
-            <div className="border-l-4 border-primary pl-6 space-y-2 glass p-6 rounded-lg hover-lift">
-              <div className="text-5xl md:text-6xl font-bold text-primary">6+</div>
-              <div className="text-muted-foreground">Years Experience</div>
+          <motion.div 
+            className="space-y-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+            viewport={{ once: true }}
+          >
+            <div className="glass rounded-2xl p-8 border border-border/30 hover-lift group">
+              <div className="flex items-baseline gap-4">
+                <span className="text-6xl md:text-7xl font-bold text-gradient">6+</span>
+                <span className="text-muted-foreground text-sm tracking-widest uppercase font-body">Years Experience</span>
+              </div>
             </div>
-            <div className="border-l-4 border-blue pl-6 space-y-2 glass p-6 rounded-lg hover-lift">
-              <div className="text-5xl md:text-6xl font-bold text-blue">100+</div>
-              <div className="text-muted-foreground">Projects Delivered</div>
+            <div className="glass rounded-2xl p-8 border border-border/30 hover-lift group">
+              <div className="flex items-baseline gap-4">
+                <span className="text-6xl md:text-7xl font-bold text-gradient">100+</span>
+                <span className="text-muted-foreground text-sm tracking-widest uppercase font-body">Projects Delivered</span>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
