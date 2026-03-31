@@ -1,0 +1,60 @@
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+
+const posts = [
+  {
+    title: "What Makes a Great Product Animation Video",
+    description: "Breaking down the key elements that separate average from outstanding.",
+  },
+  {
+    title: "How I Built the WhatsGaming FC 26 Promo",
+    description: "A behind-the-scenes look at the creative process and tools used.",
+  },
+  {
+    title: "SaaS Explainer Videos — What Works and What Doesn't",
+    description: "Lessons learned from producing dozens of SaaS explainers.",
+  },
+];
+
+export default function Blog() {
+  return (
+    <section id="insights" className="py-24 md:py-32 relative overflow-hidden">
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mb-16"
+        >
+          <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">Insights</h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {posts.map((post, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <div className="glass border border-border/30 rounded-2xl p-8 h-full flex flex-col hover-lift transition-all duration-500 hover:border-primary/15 group cursor-pointer">
+                <h3 className="text-lg font-semibold tracking-tight mb-3 group-hover:text-primary transition-colors">
+                  {post.title}
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-grow">
+                  {post.description}
+                </p>
+                <span className="inline-flex items-center gap-1.5 text-primary text-sm font-medium">
+                  Read More
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
