@@ -70,8 +70,8 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
             >
-              I design motion that feels alive — blending design, timing, and storytelling 
-              to create visuals that captivate and connect.
+              I create cinematic product animations, app promo videos and explainer content 
+              that converts viewers into buyers.
             </motion.p>
 
             {/* CTA Buttons */}
