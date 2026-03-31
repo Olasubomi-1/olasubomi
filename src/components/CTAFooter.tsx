@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function CTAFooter() {
   return (
-    <footer className="py-24 md:py-32 relative overflow-hidden">
+    <footer id="contact" className="py-24 md:py-32 relative overflow-hidden">
       <div className="absolute bottom-0 right-[-10%] w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">

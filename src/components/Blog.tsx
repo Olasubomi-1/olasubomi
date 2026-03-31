@@ -18,7 +18,7 @@ const posts = [
 
 export default function Blog() {
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden">
+    <section id="insights" className="py-24 md:py-32 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
