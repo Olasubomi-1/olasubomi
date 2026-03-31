@@ -55,11 +55,11 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-foreground leading-[0.95]">
-                Visual Creator
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-foreground leading-[0.95]">
+                Motion Graphics & 3D Animation
               </h1>
-              <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.95] text-gradient">
-                Motion Designer
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95] text-gradient">
+                for SaaS Brands, Ecommerce and Gaming
               </h1>
             </motion.div>
 
