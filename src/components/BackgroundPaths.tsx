@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useCallback, useMemo } from "react";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 function FloatingPaths({ position }: { position: number }) {
@@ -15,7 +15,7 @@ function FloatingPaths({ position }: { position: number }) {
         684 - i * 5 * position
       } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
       strokeWidth: 0.5 + i * 0.03,
-      opacity: 0.1 + i * 0.01,
+      opacity: 0.08 + i * 0.008,
       duration: 20 + Math.random() * 10,
     }));
   }, [position]);
@@ -27,13 +27,13 @@ function FloatingPaths({ position }: { position: number }) {
           <motion.path
             key={path.id}
             d={path.d}
-            stroke="hsl(217 91% 60%)"
+            stroke="hsl(213 62% 40%)"
             strokeWidth={path.strokeWidth}
             strokeOpacity={path.opacity}
-            initial={{ pathLength: 0.3, opacity: 0.2 }}
+            initial={{ pathLength: 0.3, opacity: 0.15 }}
             animate={{
               pathLength: 1,
-              opacity: [0.15, 0.3, 0.15],
+              opacity: [0.1, 0.25, 0.1],
               pathOffset: [0, 1, 0],
             }}
             transition={{
@@ -48,7 +48,7 @@ function FloatingPaths({ position }: { position: number }) {
   );
 }
 
-function BackgroundPaths() {
+export default function BackgroundPaths() {
   const title = "Motion Graphics & 3D Animation";
 
   const scrollToWork = useCallback(() => {
@@ -58,7 +58,11 @@ function BackgroundPaths() {
   const words = title.split(" ");
 
   return (
-    <section className="relative min-h-screen w-full flex items-center justify-center overflow-hidden" style={{ backgroundColor: "#0A0F1F" }}>
+    <section
+      id="intro"
+      className="relative min-h-screen w-full flex items-center justify-center overflow-hidden"
+      style={{ backgroundColor: "#0A0F1F" }}
+    >
       <div className="absolute inset-0">
         <FloatingPaths position={1} />
         <FloatingPaths position={-1} />
@@ -70,9 +74,9 @@ function BackgroundPaths() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5 }}
-            className="space-y-10"
+            className="space-y-8"
           >
-            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold tracking-tighter">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter">
               {words.map((word, wordIndex) => (
                 <span key={wordIndex} className="inline-block mr-[0.25em] last:mr-0">
                   {word.split("").map((letter, letterIndex) => (
@@ -86,7 +90,7 @@ function BackgroundPaths() {
                         damping: 20,
                         stiffness: 150,
                       }}
-                      className="inline-block text-transparent bg-clip-text bg-gradient-to-b from-foreground to-foreground/70"
+                      className="inline-block text-transparent bg-clip-text bg-gradient-to-b from-foreground to-foreground/60"
                     >
                       {letter}
                     </motion.span>
@@ -95,10 +99,21 @@ function BackgroundPaths() {
               ))}
             </h1>
 
+            <motion.p
+              className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.8, duration: 0.8 }}
+            >
+              I create cinematic product animations, app promo videos and explainer
+              content that converts viewers into buyers
+            </motion.p>
+
             <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 2, duration: 0.8 }}
+              transition={{ delay: 2.2, duration: 0.8 }}
             >
               <Button
                 onClick={scrollToWork}
@@ -108,6 +123,17 @@ function BackgroundPaths() {
                 View My Work
                 <ArrowDown className="w-4 h-4 ml-2 group-hover:translate-y-1 transition-transform" />
               </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="rounded-full px-10 py-6 text-base tracking-wide border-border/40 hover:border-primary/40"
+                asChild
+              >
+                <a href="mailto:olasubomiafolayan@gmail.com" className="flex items-center gap-2">
+                  <Mail className="w-4 h-4" />
+                  Get a Free Quote
+                </a>
+              </Button>
             </motion.div>
           </motion.div>
         </AnimatePresence>
@@ -115,5 +141,3 @@ function BackgroundPaths() {
     </section>
   );
 }
-
-export default BackgroundPaths;

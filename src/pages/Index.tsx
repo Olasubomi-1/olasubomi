@@ -1,25 +1,19 @@
 import Navigation from "@/components/Navigation";
 import BackgroundPaths from "@/components/BackgroundPaths";
-import Hero from "@/components/Hero";
-import Portfolio from "@/components/Portfolio";
-import About from "@/components/About";
-import Services from "@/components/Services";
-import Reviews from "@/components/Reviews";
-import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
+import LayerOfProof from "@/components/LayerOfProof";
+import SocialProofWall from "@/components/SocialProofWall";
+import Blog from "@/components/Blog";
+import CTAFooter from "@/components/CTAFooter";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
       <Navigation />
       <BackgroundPaths />
-      <Hero />
-      <Portfolio />
-      <About />
-      <Services />
-      <Reviews />
-      <Contact />
-      <Footer />
+      <LayerOfProof />
+      <SocialProofWall />
+      <Blog />
+      <CTAFooter />
     </div>
   );
 };
