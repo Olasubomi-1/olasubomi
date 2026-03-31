@@ -55,11 +55,11 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-foreground leading-[0.95]">
-                Visual Creator
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-foreground leading-[0.95]">
+                Motion Graphics & 3D Animation
               </h1>
-              <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-[0.95] text-gradient">
-                Motion Designer
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95] text-gradient">
+                for SaaS Brands, Ecommerce and Gaming
               </h1>
             </motion.div>
 
@@ -70,21 +70,41 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
             >
-              I design motion that feels alive — blending design, timing, and storytelling 
-              to create visuals that captivate and connect.
+              I create cinematic product animations, app promo videos and explainer content 
+              that converts viewers into buyers.
             </motion.p>
 
             {/* CTA Buttons */}
+            {/* Get a Free Quote CTA */}
             <motion.div 
-              className="flex flex-wrap items-center gap-4 pt-2"
+              className="pt-2"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.6 }}
             >
+              <a href="mailto:olasubomiafolayan@gmail.com">
+                <Button 
+                  size="lg"
+                  className="text-base tracking-wide hover-lift shadow-lg hover:shadow-glow rounded-full px-10 py-6 bg-primary text-primary-foreground font-semibold"
+                >
+                  <Mail className="w-5 h-5 mr-2" />
+                  Get a Free Quote
+                </Button>
+              </a>
+            </motion.div>
+
+            {/* Secondary buttons */}
+            <motion.div 
+              className="flex flex-wrap items-center gap-4 pt-2"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.6 }}
+            >
               <Button 
                 onClick={scrollToWork}
                 size="lg"
-                className="group text-sm tracking-wide hover-lift shadow-lg hover:shadow-glow rounded-full px-8"
+                variant="outline"
+                className="group text-sm tracking-wide glass border-border/40 hover:border-primary/40 rounded-full px-8"
               >
                 View My Work
                 <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
