@@ -10,9 +10,9 @@ export default function CTAFooter() {
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-3xl mx-auto text-center space-y-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7, type: "spring", damping: 20 }}
             viewport={{ once: true }}
             className="space-y-4"
           >
@@ -35,7 +35,7 @@ export default function CTAFooter() {
               className="rounded-full px-12 py-7 text-base font-semibold tracking-wide shadow-lg hover:shadow-glow hover-lift"
               asChild
             >
-              <a href="mailto:olasubomiafolayan@gmail.com">Start a Project</a>
+              <a href="mailto:olasubomiafolayan@gmail.com" className="animate-[pulse_3s_ease-in-out_infinite]">Start a Project</a>
             </Button>
           </motion.div>
 
