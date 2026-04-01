@@ -15,10 +15,10 @@ const reviews = [
     client: "VODEE STUDIO",
   },
   {
-    platform: "Upwork",
+    platform: "Fiverr",
     stars: 5,
     review: "Solid communication throughout. Delivered ahead of schedule with no revisions needed.",
-    client: "Chinedu Okafor",
+    client: "Daniel Hartmann",
   },
   {
     platform: "Amazon Seller",
