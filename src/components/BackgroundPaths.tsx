@@ -29,7 +29,7 @@ function FloatingPaths({ position }: { position: number }) {
             d={path.d}
             stroke="rgba(255,255,255,0.15)"
             strokeWidth={path.strokeWidth}
-            strokeOpacity={0.15 + i * 0.012}
+            strokeOpacity={path.opacity + 0.1}
             initial={{ pathLength: 0.3, opacity: 0.2 }}
             animate={{
               pathLength: 1,
