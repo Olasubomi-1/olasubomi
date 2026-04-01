@@ -19,6 +19,7 @@ const Navigation = () => {
 
   const navLinks = [
     { name: "Work", id: "work" },
+    { name: "Pricing", id: "pricing" },
     { name: "Insights", id: "insights" },
     { name: "Contact", id: "contact" },
   ];

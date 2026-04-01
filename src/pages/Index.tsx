@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import BackgroundPaths from "@/components/BackgroundPaths";
 import LayerOfProof from "@/components/LayerOfProof";
 import SocialProofWall from "@/components/SocialProofWall";
+import Pricing from "@/components/Pricing";
 import Blog from "@/components/Blog";
 import CTAFooter from "@/components/CTAFooter";
 
@@ -12,6 +13,7 @@ const Index = () => {
       <BackgroundPaths />
       <LayerOfProof />
       <SocialProofWall />
+      <Pricing />
       <Blog />
       <CTAFooter />
     </div>

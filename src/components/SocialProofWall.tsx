@@ -70,7 +70,15 @@ export default function SocialProofWall() {
                 {/* Stars */}
                 <div className="flex gap-1 mb-4">
                   {Array.from({ length: review.stars }).map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.08 + i * 0.05, type: "spring", stiffness: 300 }}
+                      viewport={{ once: true }}
+                    >
+                      <Star className="w-4 h-4 fill-primary text-primary" />
+                    </motion.div>
                   ))}
                 </div>
 
