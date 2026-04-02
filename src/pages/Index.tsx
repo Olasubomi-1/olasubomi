@@ -15,7 +15,7 @@ const Index = () => {
       <LayerOfProof />
       <ServicesPricing />
       <SocialProofWall />
-      <Pricing />
+      
       <Blog />
       <CTAFooter />
     </div>

@@ -1,6 +1,7 @@
 import { ArrowRight, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import AnimatedTextCycle from "@/components/ui/animated-text-cycle";
 
 const Hero = () => {
   const scrollToWork = () => {
