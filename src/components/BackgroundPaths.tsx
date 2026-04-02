@@ -61,7 +61,7 @@ export default function BackgroundPaths() {
     <section
       id="intro"
       className="relative min-h-screen w-full flex items-center justify-center overflow-hidden"
-      style={{ backgroundColor: "#0A0F1F" }}
+      style={{ backgroundColor: "hsl(var(--hero-bg))" }}
     >
       <div className="absolute inset-0">
         <FloatingPaths position={1} />

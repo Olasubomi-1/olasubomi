@@ -5,8 +5,69 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    /* Dark blue background - #0A0F1F */
+  /* Light mode (default) */
+  :root, .light {
+    /* Background: #F8FAFC */
+    --background: 210 40% 98%;
+    --foreground: 210 50% 13%;
+
+    /* Cards: #FFFFFF */
+    --card: 0 0% 100%;
+    --card-foreground: 210 50% 13%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 50% 13%;
+
+    /* Accent blue: #2563A8 */
+    --primary: 213 62% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary */
+    --secondary: 210 30% 95%;
+    --secondary-foreground: 210 50% 13%;
+
+    /* Muted */
+    --muted: 210 30% 95%;
+    --muted-foreground: 210 20% 40%;
+
+    /* Accent */
+    --accent: 213 62% 40%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Borders: #E2EAF4 */
+    --border: 214 40% 92%;
+    --input: 214 40% 92%;
+    --ring: 213 62% 40%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --glass: 0 0% 100% / 0.85;
+    --glass-border: 214 40% 92% / 0.8;
+
+    /* Shadows */
+    --shadow-sm: 0 2px 8px hsl(214 40% 80% / 0.3);
+    --shadow-md: 0 4px 20px hsl(214 40% 80% / 0.2);
+    --shadow-lg: 0 8px 40px hsl(214 40% 80% / 0.25);
+    --shadow-glow: 0 0 60px hsl(213 62% 40% / 0.1);
+
+    /* Nav */
+    --nav-bg: 0 0% 100%;
+    --nav-border: 214 40% 92%;
+
+    /* Hero */
+    --hero-bg: 220 60% 97%;
+
+    /* Path stroke for light mode */
+    --path-stroke: rgba(37, 99, 168, 0.08);
+  }
+
+  /* Dark mode */
+  .dark {
+    /* Background: #0A0F1F */
     --background: 222 54% 8%;
     --foreground: 220 20% 92%;
 
@@ -17,7 +78,7 @@
     --popover: 222 45% 11%;
     --popover-foreground: 220 20% 92%;
 
-    /* Accent blue - #2563A8 */
+    /* Accent blue: #2563A8 */
     --primary: 213 62% 40%;
     --primary-foreground: 0 0% 100%;
 
@@ -52,12 +113,23 @@
     --shadow-md: 0 4px 20px hsl(222 54% 4% / 0.6);
     --shadow-lg: 0 8px 40px hsl(222 54% 4% / 0.7);
     --shadow-glow: 0 0 60px hsl(213 62% 40% / 0.15);
+
+    /* Nav */
+    --nav-bg: 222 45% 11%;
+    --nav-border: 222 30% 18%;
+
+    /* Hero */
+    --hero-bg: 222 54% 8%;
+
+    /* Path stroke for dark mode */
+    --path-stroke: rgba(255, 255, 255, 0.15);
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
 
   body {
