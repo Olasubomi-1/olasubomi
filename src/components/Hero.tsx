@@ -56,10 +56,22 @@ const Hero = () => {
               transition={{ delay: 0.4, duration: 0.8 }}
             >
               <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-foreground leading-[0.95]">
-                Motion Graphics & 3D Animation
-              </h1>
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-[0.95] text-gradient">
-                for SaaS Brands, Ecommerce and Gaming
+                I create{" "}
+                <AnimatedTextCycle
+                  words={[
+                    "3D product videos",
+                    "SaaS launch videos",
+                    "app promo videos",
+                    "motion graphics",
+                    "product renders",
+                    "explainer videos",
+                    "brand visuals",
+                    "cinematic content",
+                  ]}
+                  interval={3000}
+                  className="text-[hsl(var(--primary))]"
+                />
+                {" "}that convert
               </h1>
             </motion.div>
 
