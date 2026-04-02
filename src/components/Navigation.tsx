@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,7 +28,7 @@ const Navigation = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? "glass border-b border-border/30" : "bg-transparent"
+        isScrolled ? "bg-card/90 backdrop-blur-lg border-b border-border" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-6 py-5">
@@ -49,16 +50,20 @@ const Navigation = () => {
                 {link.name}
               </button>
             ))}
+            <ThemeToggle />
           </div>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden text-foreground hover:bg-primary/10"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X /> : <Menu />}
-          </Button>
+          <div className="flex items-center gap-3 md:hidden">
+            <ThemeToggle />
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-foreground hover:bg-primary/10"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X /> : <Menu />}
+            </Button>
+          </div>
         </div>
 
         {isMobileMenuOpen && (
