@@ -63,6 +63,9 @@
 
     /* Path stroke for light mode */
     --path-stroke: rgba(37, 99, 168, 0.08);
+
+    /* Hero video overlay */
+    --hero-overlay: rgba(248, 250, 252, 0.72);
   }
 
   /* Dark mode */
