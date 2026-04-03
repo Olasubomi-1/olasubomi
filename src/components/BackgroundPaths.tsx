@@ -1,7 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState, useRef, useEffect } from "react";
 import { ArrowDown, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import heroVideo from "@/assets/sass-animation.mp4";
 
 function FloatingPaths({ position }: { position: number }) {
   const paths = useMemo(() => {
@@ -50,6 +51,13 @@ function FloatingPaths({ position }: { position: number }) {
 
 export default function BackgroundPaths() {
   const title = "Motion Graphics & 3D Animation";
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
 
   const scrollToWork = useCallback(() => {
     document.getElementById("work")?.scrollIntoView({ behavior: "smooth" });
@@ -63,10 +71,37 @@ export default function BackgroundPaths() {
       className="relative min-h-screen w-full flex items-center justify-center overflow-hidden"
       style={{ backgroundColor: "hsl(var(--hero-bg))" }}
     >
-      <div className="absolute inset-0">
-        <FloatingPaths position={1} />
-        <FloatingPaths position={-1} />
-      </div>
+      {/* Video background */}
+      {!isMobile && (
+        <video
+          ref={videoRef}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
+          src={heroVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          onCanPlay={() => setVideoLoaded(true)}
+        />
+      )}
+
+      {/* Dark overlay */}
+      <div
+        className="absolute inset-0 z-[1]"
+        style={{
+          backgroundColor: videoLoaded && !isMobile
+            ? "var(--hero-overlay)"
+            : "transparent",
+        }}
+      />
+
+      {/* Fallback animated paths (visible when video not loaded or on mobile) */}
+      {(!videoLoaded || isMobile) && (
+        <div className="absolute inset-0">
+          <FloatingPaths position={1} />
+          <FloatingPaths position={-1} />
+        </div>
+      )}
 
       <div className="relative z-10 container mx-auto px-6 text-center">
         <AnimatePresence>

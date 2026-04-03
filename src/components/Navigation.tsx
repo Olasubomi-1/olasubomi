@@ -31,13 +31,18 @@ const Navigation = () => {
         isScrolled ? "bg-card/90 backdrop-blur-lg border-b border-border" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-6 py-5">
+      <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <button
             onClick={() => scrollTo("intro")}
-            className="text-xl font-bold tracking-tight text-foreground hover:text-primary transition-colors duration-300"
+            className="text-left hover:opacity-80 transition-opacity duration-300"
           >
-            SA<span className="text-primary">.</span>
+            <span className="block text-lg font-bold tracking-tight text-foreground leading-tight">
+              Afolayan O. Jason
+            </span>
+            <span className="block text-[10px] font-light tracking-[0.2em] uppercase text-muted-foreground leading-tight">
+              Motion Designer
+            </span>
           </button>
 
           <div className="hidden md:flex items-center gap-10">
