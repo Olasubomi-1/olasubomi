@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useCallback, useMemo, useState, useRef, useEffect } from "react";
 import { ArrowDown, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroVideo from "@/assets/sass-animation.mp4";
+import heroVideo from "@/assets/tawk-crypto-hero.mp4";
 
 function FloatingPaths({ position }: { position: number }) {
   const paths = useMemo(() => {
