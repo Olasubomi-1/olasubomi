@@ -126,6 +126,9 @@
 
     /* Path stroke for dark mode */
     --path-stroke: rgba(255, 255, 255, 0.15);
+
+    /* Hero video overlay */
+    --hero-overlay: rgba(10, 15, 31, 0.65);
   }
 }
 
