@@ -8,7 +8,7 @@ const Footer = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-xs text-muted-foreground tracking-wide font-body">
-            © 2025 Afolayan. All rights reserved.
+            © 2025 Afolayan O. Jason. All rights reserved.
           </p>
           <div className="flex gap-8">
             {["work", "about", "contact"].map((id) => (
