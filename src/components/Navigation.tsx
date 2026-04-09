@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
+import { Link, useLocation } from "react-router-dom";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -19,10 +22,15 @@ const Navigation = () => {
   };
 
   const navLinks = [
-    { name: "Work", id: "work" },
-    { name: "Pricing", id: "pricing" },
-    { name: "Insights", id: "insights" },
-    { name: "Contact", id: "contact" },
+    ...(isHome ? [
+      { name: "Work", id: "work", type: "scroll" as const },
+      { name: "Pricing", id: "pricing", type: "scroll" as const },
+    ] : []),
+    { name: "About", id: "/about", type: "link" as const },
+    { name: "Insights", id: "/blog", type: "link" as const },
+    ...(isHome ? [
+      { name: "Contact", id: "contact", type: "scroll" as const },
+    ] : []),
   ];
 
   return (
@@ -33,8 +41,8 @@ const Navigation = () => {
     >
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <button
-            onClick={() => scrollTo("intro")}
+          <Link
+            to="/"
             className="text-left hover:opacity-80 transition-opacity duration-300"
           >
             <span className="block text-lg font-bold tracking-tight text-foreground leading-tight">
@@ -43,18 +51,28 @@ const Navigation = () => {
             <span className="block text-[10px] font-light tracking-[0.2em] uppercase text-muted-foreground leading-tight">
               Motion Designer
             </span>
-          </button>
+          </Link>
 
           <div className="hidden md:flex items-center gap-10">
-            {navLinks.map((link) => (
-              <button
-                key={link.id}
-                onClick={() => scrollTo(link.id)}
-                className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-[0.15em] uppercase"
-              >
-                {link.name}
-              </button>
-            ))}
+            {navLinks.map((link) =>
+              link.type === "link" ? (
+                <Link
+                  key={link.id}
+                  to={link.id}
+                  className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-[0.15em] uppercase"
+                >
+                  {link.name}
+                </Link>
+              ) : (
+                <button
+                  key={link.id}
+                  onClick={() => scrollTo(link.id)}
+                  className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-[0.15em] uppercase"
+                >
+                  {link.name}
+                </button>
+              )
+            )}
             <ThemeToggle />
           </div>
 
@@ -74,15 +92,26 @@ const Navigation = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 pb-4 animate-fade-in border-t border-border/30 pt-4">
             <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <button
-                  key={link.id}
-                  onClick={() => scrollTo(link.id)}
-                  className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors tracking-[0.15em] uppercase"
-                >
-                  {link.name}
-                </button>
-              ))}
+              {navLinks.map((link) =>
+                link.type === "link" ? (
+                  <Link
+                    key={link.id}
+                    to={link.id}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors tracking-[0.15em] uppercase"
+                  >
+                    {link.name}
+                  </Link>
+                ) : (
+                  <button
+                    key={link.id}
+                    onClick={() => scrollTo(link.id)}
+                    className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors tracking-[0.15em] uppercase"
+                  >
+                    {link.name}
+                  </button>
+                )
+              )}
             </div>
           </div>
         )}
