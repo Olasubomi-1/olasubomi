@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 const saasPlans = [
   {
     name: "Starter Launch",
-    price: "$50",
+    price: "$100",
     tagline: "Get your product in front of the right people, fast.",
     features: [
       "30 second SaaS explainer or app promo video",
@@ -17,7 +17,7 @@ const saasPlans = [
   },
   {
     name: "Growth Package",
-    price: "$120",
+    price: "$200",
     tagline: "Everything you need to launch with confidence.",
     features: [
       "60 second SaaS explainer video",
@@ -28,7 +28,7 @@ const saasPlans = [
   },
   {
     name: "Full Launch Package",
-    price: "$200",
+    price: "$350",
     tagline: "Your complete launch visual toolkit.",
     features: [
       "90 second cinematic SaaS commercial",
@@ -42,7 +42,7 @@ const saasPlans = [
 const ecommercePlans = [
   {
     name: "Product Spotlight",
-    price: "$50",
+    price: "$70",
     tagline: "Make your product impossible to scroll past.",
     features: [
       "1 photorealistic 3D product render — studio quality",
