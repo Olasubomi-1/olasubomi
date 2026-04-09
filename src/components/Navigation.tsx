@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
+import { Link, useLocation } from "react-router-dom";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -19,10 +22,15 @@ const Navigation = () => {
   };
 
   const navLinks = [
-    { name: "Work", id: "work" },
-    { name: "Pricing", id: "pricing" },
-    { name: "Insights", id: "insights" },
-    { name: "Contact", id: "contact" },
+    ...(isHome ? [
+      { name: "Work", id: "work", type: "scroll" as const },
+      { name: "Pricing", id: "pricing", type: "scroll" as const },
+    ] : []),
+    { name: "About", id: "/about", type: "link" as const },
+    { name: "Insights", id: "/blog", type: "link" as const },
+    ...(isHome ? [
+      { name: "Contact", id: "contact", type: "scroll" as const },
+    ] : []),
   ];
 
   return (
