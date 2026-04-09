@@ -45,7 +45,6 @@ const About = () => {
               and cinematic motion graphics. I work with founders, ecommerce brands and creative teams
               who want visuals that don't just look good — they convert.
             </p>
-            </p>
           </motion.div>
         </div>
       </section>
