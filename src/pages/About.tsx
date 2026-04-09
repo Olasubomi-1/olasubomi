@@ -43,7 +43,7 @@ const About = () => {
             <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
               I'm Jason — a motion designer specialising in 3D product animation, SaaS launch videos
               and cinematic motion graphics. I work with founders, ecommerce brands and creative teams
-              who want visuals that don't just look good — they convert. Based in Nigeria. Working globally.
+              who want visuals that don't just look good — they convert.
             </p>
           </motion.div>
         </div>
