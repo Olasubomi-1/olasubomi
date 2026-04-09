@@ -81,7 +81,9 @@ export default function BackgroundPaths() {
           loop
           muted
           playsInline
+          preload="metadata"
           onCanPlay={() => setVideoLoaded(true)}
+          onError={() => setVideoLoaded(false)}
         />
       )}
 
