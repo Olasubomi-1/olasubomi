@@ -111,9 +111,7 @@ const Navigation = () => {
                     {link.name}
                   </button>
                 )
-            </div>
-          </div>
-        )}
+              )}
             </div>
           </div>
         )}
