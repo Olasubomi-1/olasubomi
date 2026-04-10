@@ -46,6 +46,7 @@ const categories: Category[] = [
     assets: [
       { id: 4, iframe: "https://www.youtube.com/embed/fXwg7ZSMxqA?autoplay=1&mute=1&loop=1&playlist=fXwg7ZSMxqA", title: "YouTube Video" },
       { id: 5, video: lastnVideo, title: "Interviews" },
+      { id: 17, iframe: "https://www.youtube.com/embed/PfD3rVuf624?autoplay=1&mute=1&loop=1&playlist=PfD3rVuf624", title: "Vlog" },
     ],
   },
   {

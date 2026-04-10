@@ -85,7 +85,7 @@ export default function ServicesPricing() {
   const currentGroup = groups[activeGroup];
 
   return (
-    <section id="services" className="py-24 md:py-32 relative overflow-hidden">
+    <section id="pricing" className="py-24 md:py-32 relative overflow-hidden">
       <div className="absolute top-1/3 left-[-10%] w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto px-6 relative z-10">
