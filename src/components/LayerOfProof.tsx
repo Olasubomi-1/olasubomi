@@ -42,6 +42,7 @@ const categories: Category[] = [
       { id: 1, video: visualIdentityVideo, title: "SaaS Video" },
       { id: 2, video: productAnimationVideo, title: "App Promo" },
       { id: 3, video: sunbruLogoVideo, title: "Logo Intro" },
+      { id: 21, video: whatsgamePromoVideo, title: "Promo Videos" },
     ],
   },
   {
