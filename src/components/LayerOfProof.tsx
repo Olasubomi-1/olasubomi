@@ -12,6 +12,7 @@ import sunbruLogoVideo from "@/assets/sunbru-logo-intro.mp4";
 import lastnVideo from "@/assets/lastn.mp4";
 import render3dVideo from "@/assets/3d-product-video.mp4";
 import perfumeVideo from "@/assets/3d-perfume-animation.mp4";
+import whatsgamePromoVideo from "@/assets/whatsgame-promo.mp4";
 import renderAuroe from "@/assets/3d-render-auroe.jpg";
 
 import project1 from "@/assets/project-1.jpg";
