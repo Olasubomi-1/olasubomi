@@ -165,9 +165,17 @@ function CategorySlider({ category, index }: { category: Category; index: number
   );
 }
 
-/* ── Image Gallery with lightbox ── */
+/* ── Image/Video Gallery with lightbox ── */
 function ImageGallery({ category }: { category: Category }) {
-  const [lightbox, setLightbox] = useState<string | null>(null);
+  const [lightbox, setLightbox] = useState<{ src: string; type: "image" | "video" } | null>(null);
+
+  const handleClick = (asset: Asset) => {
+    if (asset.video) {
+      setLightbox({ src: asset.video, type: "video" });
+    } else if (asset.image) {
+      setLightbox({ src: asset.image, type: "image" });
+    }
+  };
 
   return (
     <>
@@ -178,15 +186,26 @@ function ImageGallery({ category }: { category: Category }) {
             className="flex-shrink-0 w-[280px] md:w-[320px] group cursor-pointer"
             whileHover={{ scale: 1.03 }}
             transition={{ duration: 0.3 }}
-            onClick={() => asset.image && setLightbox(asset.image)}
+            onClick={() => handleClick(asset)}
           >
             <div className="relative overflow-hidden rounded-2xl border border-border/30">
               <div className="aspect-square overflow-hidden bg-card">
-                <img
-                  src={asset.image}
-                  alt={asset.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
+                {asset.video ? (
+                  <video
+                    src={asset.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                ) : (
+                  <img
+                    src={asset.image}
+                    alt={asset.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                )}
               </div>
               <div className="absolute inset-0 bg-background/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                 <Search className="w-6 h-6 text-foreground" />
@@ -205,8 +224,13 @@ function ImageGallery({ category }: { category: Category }) {
           >
             <X className="w-5 h-5" />
           </button>
-          <div className="p-6">
-            {lightbox && <img src={lightbox} alt="" className="w-full h-auto rounded-xl" />}
+          <div className="p-6 flex items-center justify-center">
+            {lightbox?.type === "image" && (
+              <img src={lightbox.src} alt="" className="w-full h-auto rounded-xl" />
+            )}
+            {lightbox?.type === "video" && (
+              <video src={lightbox.src} autoPlay loop controls playsInline className="max-w-full max-h-[80vh] rounded-xl" />
+            )}
           </div>
         </DialogContent>
       </Dialog>
