@@ -10,6 +10,9 @@ import productAnimationVideo from "@/assets/product-animation.mp4";
 import sassAnimationVideo from "@/assets/sass-animation.mp4";
 import sunbruLogoVideo from "@/assets/sunbru-logo-intro.mp4";
 import lastnVideo from "@/assets/lastn.mp4";
+import render3dVideo from "@/assets/3d-product-video.mp4";
+import perfumeVideo from "@/assets/3d-perfume-animation.mp4";
+import renderAuroe from "@/assets/3d-render-auroe.jpg";
 
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
@@ -67,6 +70,9 @@ const categories: Category[] = [
       { id: 11, image: project2, title: "Product Render 2" },
       { id: 12, image: project3, title: "Product Render 3" },
       { id: 13, image: project4, title: "Product Render 4" },
+      { id: 18, image: renderAuroe, title: "Auroe Product Render" },
+      { id: 19, video: render3dVideo, title: "3D Product Animation" },
+      { id: 20, video: perfumeVideo, title: "3D Perfume Animation" },
     ],
   },
 ];
