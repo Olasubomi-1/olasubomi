@@ -75,6 +75,14 @@ const Navigation = () => {
                 >
                   {link.name}
                 </Link>
+              ) : link.type === "pricing" ? (
+                <button
+                  key={link.id}
+                  onClick={handlePricingClick}
+                  className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-[0.15em] uppercase"
+                >
+                  {link.name}
+                </button>
               ) : (
                 <button
                   key={link.id}
@@ -114,6 +122,14 @@ const Navigation = () => {
                   >
                     {link.name}
                   </Link>
+                ) : link.type === "pricing" ? (
+                  <button
+                    key={link.id}
+                    onClick={handlePricingClick}
+                    className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors tracking-[0.15em] uppercase"
+                  >
+                    {link.name}
+                  </button>
                 ) : (
                   <button
                     key={link.id}
