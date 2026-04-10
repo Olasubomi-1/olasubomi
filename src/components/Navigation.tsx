@@ -21,11 +21,23 @@ const Navigation = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const handlePricingClick = () => {
+    if (isHome) {
+      document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      window.location.href = "/#pricing";
+    }
+    setIsMobileMenuOpen(false);
+  };
+
   const navLinks = [
+    ...(!isHome ? [
+      { name: "Home", id: "/", type: "link" as const },
+    ] : []),
     ...(isHome ? [
       { name: "Work", id: "work", type: "scroll" as const },
-      { name: "Pricing", id: "pricing", type: "scroll" as const },
     ] : []),
+    { name: "Pricing", id: "pricing", type: "pricing" as const },
     { name: "About", id: "/about", type: "link" as const },
     { name: "Insights", id: "/blog", type: "link" as const },
     ...(isHome ? [
