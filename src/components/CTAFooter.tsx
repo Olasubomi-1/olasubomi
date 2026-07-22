@@ -68,7 +68,7 @@ export default function CTAFooter() {
         {/* Bottom bar */}
         <div className="mt-20 pt-8 border-t border-border/20 text-center">
           <p className="text-xs text-muted-foreground tracking-wide">
-            © 2025 Afolayan. All rights reserved.
+            © 2026 Afolayan. All rights reserved.
           </p>
         </div>
       </div>
