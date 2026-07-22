@@ -42,7 +42,7 @@ export default function SocialProofWall() {
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="max-w-3xl mb-16"
@@ -57,7 +57,7 @@ export default function SocialProofWall() {
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.08 }}
               viewport={{ once: true }}
             >
@@ -73,7 +73,7 @@ export default function SocialProofWall() {
                     <motion.div
                       key={i}
                       initial={{ opacity: 0, scale: 0 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
+                      animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: index * 0.08 + i * 0.05, type: "spring", stiffness: 300 }}
                       viewport={{ once: true }}
                     >

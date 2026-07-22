@@ -11,7 +11,7 @@ export default function CTAFooter() {
         <div className="max-w-3xl mx-auto text-center space-y-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, type: "spring", damping: 20 }}
             viewport={{ once: true }}
             className="space-y-4"
@@ -26,7 +26,7 @@ export default function CTAFooter() {
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
@@ -42,7 +42,7 @@ export default function CTAFooter() {
           <motion.div
             className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-4"
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
           >
