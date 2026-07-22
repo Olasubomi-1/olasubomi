@@ -166,7 +166,7 @@ export default function BackgroundPaths() {
                 className="rounded-full px-10 py-6 text-base tracking-wide border-border/40 hover:border-primary/40"
                 asChild
               >
-                <a href="mailto:olasubomiafolayan@gmail.com" className="flex items-center gap-2">
+                <a href="/quote" className="flex items-center gap-2">
                   <Mail className="w-4 h-4" />
                   Get a Free Quote
                 </a>
