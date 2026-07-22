@@ -4,6 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Hide Lovable badge globally */
+#lovable-badge { display: none !important; }
+
 @layer base {
   /* Light mode (default) */
   :root, .light {

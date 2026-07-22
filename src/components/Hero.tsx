@@ -95,7 +95,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.6 }}
             >
-              <a href="mailto:olasubomiafolayan@gmail.com">
+              <a href="/quote">
                 <Button 
                   size="lg"
                   className="text-base tracking-wide hover-lift shadow-lg hover:shadow-glow rounded-full px-10 py-6 bg-primary text-primary-foreground font-semibold"

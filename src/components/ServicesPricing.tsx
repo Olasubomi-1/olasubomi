@@ -92,7 +92,7 @@ export default function ServicesPricing() {
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-12"
@@ -108,7 +108,7 @@ export default function ServicesPricing() {
         {/* Toggle */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
           className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-14"
@@ -142,7 +142,7 @@ export default function ServicesPricing() {
               <motion.div
                 key={plan.name}
                 initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.15 }}
                 viewport={{ once: true }}
                 className="relative"
@@ -220,7 +220,7 @@ export default function ServicesPricing() {
         <motion.p
           className="text-center text-muted-foreground text-sm mt-12"
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           viewport={{ once: true }}
         >

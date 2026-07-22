@@ -43,7 +43,7 @@ const Reviews = () => {
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="max-w-3xl mb-20"
@@ -61,7 +61,7 @@ const Reviews = () => {
             <motion.div
               key={review.id}
               initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ 
                 duration: 0.6, 
                 delay: index * 0.08,
