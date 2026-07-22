@@ -21,11 +21,11 @@ const Navigation = () => {
     setIsMobileMenuOpen(false);
   };
 
-  const handlePricingClick = () => {
+  const handleServicesClick = () => {
     if (isHome) {
-      document.getElementById("pricing")?.scrollIntoView({ behavior: "smooth" });
+      document.getElementById("services")?.scrollIntoView({ behavior: "smooth" });
     } else {
-      window.location.href = "/#pricing";
+      window.location.href = "/#services";
     }
     setIsMobileMenuOpen(false);
   };
@@ -37,7 +37,7 @@ const Navigation = () => {
     ...(isHome ? [
       { name: "Work", id: "work", type: "scroll" as const },
     ] : []),
-    { name: "Pricing", id: "pricing", type: "pricing" as const },
+    { name: "Services", id: "services", type: "services" as const },
     { name: "About", id: "/about", type: "link" as const },
     { name: "Insights", id: "/blog", type: "link" as const },
     ...(isHome ? [
@@ -75,10 +75,10 @@ const Navigation = () => {
                 >
                   {link.name}
                 </Link>
-              ) : link.type === "pricing" ? (
+              ) : link.type === "services" ? (
                 <button
                   key={link.id}
-                  onClick={handlePricingClick}
+                  onClick={handleServicesClick}
                   className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 tracking-[0.15em] uppercase"
                 >
                   {link.name}
@@ -122,10 +122,10 @@ const Navigation = () => {
                   >
                     {link.name}
                   </Link>
-                ) : link.type === "pricing" ? (
+                ) : link.type === "services" ? (
                   <button
                     key={link.id}
-                    onClick={handlePricingClick}
+                    onClick={handleServicesClick}
                     className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors tracking-[0.15em] uppercase"
                   >
                     {link.name}
