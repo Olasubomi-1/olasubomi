@@ -37,7 +37,7 @@ const Navigation = () => {
     ...(isHome ? [
       { name: "Work", id: "work", type: "scroll" as const },
     ] : []),
-    { name: "Services", id: "services", type: "services" as const },
+    { name: "What I Do", id: "services", type: "services" as const },
     { name: "About", id: "/about", type: "link" as const },
     { name: "Insights", id: "/blog", type: "link" as const },
     ...(isHome ? [

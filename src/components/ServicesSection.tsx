@@ -1,41 +1,27 @@
 import { motion } from "framer-motion";
-import { CircleCheck } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 
-const services = [
+const capabilities = [
   {
     name: "3D Product Animation",
-    tagline: "Make your product impossible to scroll past.",
-    features: [
-      "Photorealistic 3D product renders — studio quality",
-      "Cinematic product reveal animations",
-      "Optimised for Amazon, Shopify and social media ads",
-      "Multiple format delivery — 4K, vertical and square",
-    ],
-    featured: false,
+    statement:
+      "I turn products into cinematic, scroll-stopping renders that look like studio work — built for Amazon, Shopify, and social.",
   },
   {
     name: "App & SaaS Promo Video",
-    tagline: "Everything you need to launch with confidence.",
-    features: [
-      "60–90 second SaaS explainer or app promo video",
-      "Custom motion graphics and branded intro sequence",
-      "Sound design and voiceover sync",
-      "1080p + vertical format for social media ads",
-    ],
-    featured: true,
+    statement:
+      "I create the videos that launch products — explainer clarity, motion polish, sound designed to hold attention.",
   },
   {
     name: "Short-Form Ad Content",
-    tagline: "Viral-ready content built for the feed.",
-    features: [
-      "15–30 second social media ads and reels",
-      "Motion graphics and animated text overlays",
-      "Vertical format for TikTok, Reels and Shorts",
-      "Ready for paid ads or organic posting",
-    ],
-    featured: false,
+    statement:
+      "Vertical-first content built for the feed — TikTok, Reels, Shorts — that doesn't feel like an ad.",
+  },
+  {
+    name: "Long-Form Content",
+    statement:
+      "Vlogs, tutorials, podcasts — I edit long-form into something people actually stay for, not click away from.",
   },
 ];
 
@@ -49,78 +35,44 @@ export default function ServicesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-16"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">Services</h2>
+          <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">What I Do</h2>
           <p className="text-muted-foreground text-base md:text-lg">
             Pick what fits your project. Get a custom quote in 24 hours.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {services.map((service, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+          {capabilities.map((capability, index) => (
             <motion.div
-              key={service.name}
+              key={capability.name}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.12 }}
-              viewport={{ once: true }}
-              className="relative"
+              className="glass rounded-2xl p-8 border border-border/30 hover:border-primary/30 transition-all duration-500 hover-lift"
             >
-              {service.featured && (
-                <div className="absolute -inset-[1px] rounded-2xl bg-gradient-to-b from-primary/40 via-primary/20 to-primary/5 blur-[1px] pointer-events-none" />
-              )}
-              <div
-                className={`relative glass rounded-2xl p-8 h-full flex flex-col transition-all duration-500 hover-lift ${
-                  service.featured
-                    ? "border-2 border-primary/40 shadow-[0_0_40px_hsl(213_62%_40%/0.12)]"
-                    : "border border-border/30 hover:border-primary/15"
-                }`}
-              >
-                <h3 className="text-xl font-semibold tracking-tight mb-3">{service.name}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                  {service.tagline}
-                </p>
-                <div className="divider-gradient mb-6" />
-                <ul className="space-y-3 mb-8 flex-grow">
-                  {service.features.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-3 text-sm text-foreground/80">
-                      <CircleCheck className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <Button
-                  size="lg"
-                  className={`w-full rounded-full py-6 text-sm font-semibold tracking-wide ${
-                    service.featured
-                      ? "shadow-lg hover:shadow-glow"
-                      : "bg-secondary hover:bg-secondary/80 text-foreground"
-                  }`}
-                  variant={service.featured ? "default" : "secondary"}
-                  asChild
-                >
-                  <Link to="/quote">Get a Quote</Link>
-                </Button>
-              </div>
+              <h3 className="text-xl font-semibold tracking-tight mb-3">{capability.name}</h3>
+              <div className="divider-gradient mb-4" />
+              <p className="text-muted-foreground text-sm leading-relaxed">{capability.statement}</p>
             </motion.div>
           ))}
         </div>
 
-        <motion.p
-          className="text-center text-muted-foreground text-sm mt-12"
+        <motion.div
+          className="text-center mt-14"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.6 }}
         >
-          Need something custom?{" "}
-          <Link to="/quote" className="text-primary hover:underline font-medium">
-            Request a quote
-          </Link>{" "}
-          and we'll figure it out.
-        </motion.p>
+          <Button
+            size="lg"
+            className="rounded-full px-10 py-6 text-sm font-semibold tracking-wide shadow-lg hover:shadow-glow"
+            asChild
+          >
+            <Link to="/quote">Get a Quote</Link>
+          </Button>
+        </motion.div>
       </div>
     </section>
   );
