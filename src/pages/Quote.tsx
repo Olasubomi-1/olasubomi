@@ -21,13 +21,13 @@ const steps = [
   {
     title: "When do you need it?",
     key: "timeline",
-    options: ["ASAP — it's urgent", "2–4 weeks", "I'm flexible"],
+    options: ["ASAP, it's urgent", "2–4 weeks", "I'm flexible"],
   },
   {
     title: "What's your budget range?",
-    subtitle: "Helps me tailor the right package — no commitment.",
+    subtitle: "Helps me tailor the right package. No commitment.",
     key: "budget",
-    options: ["Under $100", "$100–400", "$400+", "Not sure yet — let's discuss"],
+    options: ["Under $100", "$100–400", "$400+", "Not sure yet, let's discuss"],
   },
 ] as const;
 
@@ -61,7 +61,7 @@ export default function QuotePage() {
       localStorage.setItem("quote_leads", JSON.stringify(existing));
     } catch {}
 
-    const subject = `New Quote Request — ${answers.service || "Service"} from ${answers.name}`;
+    const subject = `New Quote Request: ${answers.service || "Service"} from ${answers.name}`;
     const body = [
       `Service: ${answers.service || ""}`,
       `Scope: ${answers.scope || ""}`,
@@ -96,7 +96,7 @@ export default function QuotePage() {
                 <Check className="w-8 h-8 text-primary" />
               </div>
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
-                Got it — quote's on its way.
+                Got it. Quote's on its way.
               </h1>
               <p className="text-muted-foreground text-base md:text-lg">
                 I'll review your answers and get back to you within 24 hours.

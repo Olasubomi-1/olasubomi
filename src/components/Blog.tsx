@@ -15,7 +15,7 @@ const posts = [
   },
   {
     slug: "saas-explainer-videos-what-works-and-what-doesnt",
-    title: "SaaS Explainer Videos — What Works and What Doesn't",
+    title: "SaaS Explainer Videos: What Works and What Doesn't",
     description: "Lessons learned from producing dozens of SaaS explainers.",
   },
 ];

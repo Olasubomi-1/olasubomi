@@ -6,22 +6,22 @@ const capabilities = [
   {
     name: "3D Product Animation",
     statement:
-      "I turn products into cinematic, scroll-stopping renders that look like studio work — built for Amazon, Shopify, and social.",
+      "I turn products into cinematic, scroll-stopping renders that look like studio work, built for Amazon, Shopify, and social.",
   },
   {
     name: "App & SaaS Promo Video",
     statement:
-      "I create the videos that launch products — explainer clarity, motion polish, sound designed to hold attention.",
+      "I create the videos that launch products, explainer clarity, motion polish, sound designed to hold attention.",
   },
   {
     name: "Short-Form Ad Content",
     statement:
-      "Vertical-first content built for the feed — TikTok, Reels, Shorts — that doesn't feel like an ad.",
+      "Vertical-first content built for the feed, TikTok, Reels, Shorts, that doesn't feel like an ad.",
   },
   {
     name: "Long-Form Content",
     statement:
-      "Vlogs, tutorials, podcasts — I edit long-form into something people actually stay for, not click away from.",
+      "Vlogs, tutorials, podcasts, I edit long-form into something people actually stay for, not click away from.",
   },
 ];
 

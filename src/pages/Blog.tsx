@@ -21,7 +21,7 @@ const posts = [
   {
     slug: "saas-explainer-videos-what-works",
     category: "3D Animation",
-    title: "SaaS Explainer Videos — What Works and What Doesn't",
+    title: "SaaS Explainer Videos: What Works and What Doesn't",
     excerpt: "After working with multiple SaaS brands, here's what I've learned.",
     date: "April 2025",
   },
