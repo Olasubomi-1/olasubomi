@@ -79,7 +79,8 @@ const categories: Category[] = [
   },
 ];
 
-const tabLabels = ["Motion Visuals", "Long Form Videos", "Short Form Content", "3D Product Renders"];
+const tabLabels = ["Motion Visuals", "Long Form Videos", "Short Form Content"];
+// Note: "3D Product Renders" (categories[3]) is temporarily hidden. Re-add "3D Product Renders" to tabLabels to restore.
 
 /* ── Video/Iframe Slider ── */
 function CategorySlider({ category, index }: { category: Category; index: number }) {

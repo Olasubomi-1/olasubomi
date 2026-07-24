@@ -3,13 +3,13 @@ import { Star } from "lucide-react";
 
 const reviews = [
   {
-    platform: "Fiverr",
+    platform: "Crypto Brand",
     stars: 5,
     review: "Clean work, fast delivery. Exactly what we needed.",
     client: "TAWK CRYPTO",
   },
   {
-    platform: "Fiverr",
+    platform: "Agency",
     stars: 5,
     review: "Professional and easy to work with. The quality speaks for itself.",
     client: "VODEE STUDIO",
@@ -25,12 +25,6 @@ const reviews = [
     stars: 5,
     review: "High-quality visuals and quick turnaround. Will definitely work together again.",
     client: "Marcus Weber",
-  },
-  {
-    platform: "Fintech Company",
-    stars: 5,
-    review: "Clear, polished, and professional. Made the whole process smooth.",
-    client: "Elena Kowalski",
   },
 ];
 
