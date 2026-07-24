@@ -41,9 +41,9 @@ const About = () => {
             </h1>
             <p className="text-primary font-medium text-lg mb-6">Motion Designer</p>
             <p className="text-muted-foreground text-base md:text-lg leading-relaxed">
-              I'm Jason — a motion designer specialising in 3D product animation, SaaS launch videos
+              I'm Jason, a motion designer specialising in 3D product animation, SaaS launch videos
               and cinematic motion graphics. I work with founders, ecommerce brands and creative teams
-              who want visuals that don't just look good — they convert.
+              who want visuals that don't just look good. They convert.
             </p>
           </motion.div>
         </div>

@@ -11,7 +11,7 @@ const saasPlans = [
     features: [
       "30 second SaaS explainer or app promo video",
       "Motion graphics and animated text",
-      "1080p MP4 — ready for Product Hunt, LinkedIn and your website",
+      "1080p MP4, ready for Product Hunt, LinkedIn and your website",
     ],
     featured: false,
   },
@@ -33,7 +33,7 @@ const saasPlans = [
     features: [
       "90 second cinematic SaaS commercial",
       "Motion graphics, transitions and sound design",
-      "4K delivery + 3 format versions — YouTube, Reels, LinkedIn",
+      "4K delivery + 3 format versions, YouTube, Reels, LinkedIn",
     ],
     featured: false,
   },
@@ -45,9 +45,9 @@ const ecommercePlans = [
     price: "$70",
     tagline: "Make your product impossible to scroll past.",
     features: [
-      "1 photorealistic 3D product render — studio quality",
+      "1 photorealistic 3D product render, studio quality",
       "1 x 15 second product reveal animation",
-      "High resolution PNG + MP4 — ready for Amazon, Shopify and Etsy",
+      "High resolution PNG + MP4, ready for Amazon, Shopify and Etsy",
     ],
     featured: false,
   },
@@ -56,7 +56,7 @@ const ecommercePlans = [
     price: "$120",
     tagline: "Everything your store needs to look premium.",
     features: [
-      "3 photorealistic 3D product renders — multiple angles",
+      "3 photorealistic 3D product renders, multiple angles",
       "1 x 30 second product promo video",
       "Optimised for Amazon, Shopify and social media ads",
     ],

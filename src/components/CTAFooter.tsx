@@ -35,7 +35,7 @@ export default function CTAFooter() {
               className="rounded-full px-12 py-7 text-base font-semibold tracking-wide shadow-lg hover:shadow-glow hover-lift"
               asChild
             >
-              <a href="/quote" className="animate-[pulse_3s_ease-in-out_infinite]">Start a Project</a>
+              <a href="/quote" className="animate-[pulse_3s_ease-in-out_infinite]">Work With Me</a>
             </Button>
           </motion.div>
 

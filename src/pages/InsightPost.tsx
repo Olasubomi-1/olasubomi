@@ -11,7 +11,7 @@ const InsightPost = () => {
 
   useEffect(() => {
     if (post) {
-      document.title = `${post.title} — Afolayan O. Jason`;
+      document.title = `${post.title} | Afolayan O. Jason`;
       const meta = document.querySelector('meta[name="description"]');
       if (meta) meta.setAttribute("content", post.excerpt);
     }
