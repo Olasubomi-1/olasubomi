@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Navigation from "@/components/Navigation";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const steps = [
   {
@@ -33,12 +34,11 @@ const steps = [
 
 type Answers = Record<string, string> & { name?: string; email?: string; notes?: string };
 
-const RECIPIENT = "afolayanolasubomi@gmail.com";
-
 export default function QuotePage() {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
   const total = 5;
 
   const select = (key: string, value: string) => {
@@ -46,7 +46,7 @@ export default function QuotePage() {
     setTimeout(() => setStep((s) => Math.min(s + 1, total - 1)), 180);
   };
 
-  const submit = () => {
+  const submit = async () => {
     if (!answers.name || !answers.email) {
       toast.error("Please fill in your name and email.");
       return;
@@ -61,21 +61,28 @@ export default function QuotePage() {
       localStorage.setItem("quote_leads", JSON.stringify(existing));
     } catch {}
 
-    const subject = `New Quote Request: ${answers.service || "Service"} from ${answers.name}`;
-    const body = [
-      `Service: ${answers.service || ""}`,
-      `Scope: ${answers.scope || ""}`,
-      `Timeline: ${answers.timeline || ""}`,
-      `Budget: ${answers.budget || ""}`,
-      `Name: ${answers.name || ""}`,
-      `Email: ${answers.email || ""}`,
-      `Notes: ${answers.notes || ""}`,
-      `Submitted: ${timestamp}`,
-    ].join("\n");
-
-    // Open user's mail client to deliver notification to owner
-    window.location.href = `mailto:${RECIPIENT}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSubmitted(true);
+    setSending(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("send-quote", {
+        body: {
+          service: answers.service,
+          scope: answers.scope,
+          timeline: answers.timeline,
+          budget: answers.budget,
+          name: answers.name,
+          email: answers.email,
+          notes: answers.notes,
+        },
+      });
+      if (error) throw error;
+      if (data && (data as any).error) throw new Error((data as any).error);
+      setSubmitted(true);
+    } catch (err: any) {
+      console.error("send-quote failed:", err);
+      toast.error("Could not send your request. Please try again or email olasubomiafolayan@gmail.com.");
+    } finally {
+      setSending(false);
+    }
   };
 
   const progress = ((step + 1) / total) * 100;
@@ -201,10 +208,11 @@ export default function QuotePage() {
                         </div>
                         <Button
                           onClick={submit}
+                          disabled={sending}
                           size="lg"
                           className="w-full rounded-full py-6 text-base font-semibold tracking-wide shadow-lg hover:shadow-glow mt-2"
                         >
-                          Send my quote request
+                          {sending ? "Sending..." : "Send my quote request"}
                           <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
                       </div>
