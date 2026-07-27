@@ -10,7 +10,7 @@ interface QuotePayload {
   notes?: string
 }
 
-const RECIPIENT = 'afolayanolasubomi@gmail.com'
+const RECIPIENT = 'olasubomiafolayan@gmail.com'
 const FROM = 'Quote Form <onboarding@resend.dev>'
 
 Deno.serve(async (req) => {
