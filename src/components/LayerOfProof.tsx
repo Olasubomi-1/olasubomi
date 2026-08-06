@@ -3,7 +3,8 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
-import { X, Search } from "lucide-react";
+import { X, Search, Volume2, VolumeX } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 import visualIdentityVideo from "@/assets/visual-identity.mp4";
 import productAnimationVideo from "@/assets/product-animation.mp4";
@@ -43,6 +44,9 @@ const categories: Category[] = [
       { id: 2, video: productAnimationVideo, title: "App Promo" },
       { id: 3, video: sunbruLogoVideo, title: "Logo Intro" },
       { id: 21, video: whatsgamePromoVideo, title: "Promo Videos" },
+      { id: 22, iframe: "https://www.youtube.com/embed/u1imsQsZoZ8?autoplay=1&mute=1&loop=1&playlist=u1imsQsZoZ8&playsinline=1", title: "Bread Ad" },
+      { id: 23, iframe: "https://www.youtube.com/embed/DuvhryPBhcQ?autoplay=1&mute=1&loop=1&playlist=DuvhryPBhcQ&playsinline=1", title: "MyCharrg Launch" },
+      { id: 24, iframe: "https://www.youtube.com/embed/5LcH0AZr9QU?autoplay=1&mute=1&loop=1&playlist=5LcH0AZr9QU&playsinline=1", title: "PureFi Launch" },
     ],
   },
   {
@@ -89,6 +93,12 @@ function CategorySlider({ category, index }: { category: Category; index: number
     [Autoplay({ delay: 4000 + index * 1000, stopOnInteraction: false })]
   );
   const [expandedMedia, setExpandedMedia] = useState<{ src: string; type: "video" | "iframe" } | null>(null);
+  const [unmutedVideos, setUnmutedVideos] = useState<Record<number, boolean>>({});
+
+  const getIframeSrc = (asset: Asset) => {
+    if (!asset.iframe || !unmutedVideos[asset.id]) return asset.iframe;
+    return asset.iframe.replace("mute=1", "mute=0");
+  };
 
   const handleClick = (asset: Asset) => {
     if (asset.video) setExpandedMedia({ src: asset.video, type: "video" });
@@ -113,7 +123,7 @@ function CategorySlider({ category, index }: { category: Category; index: number
                 <div className="aspect-[4/5] overflow-hidden bg-card">
                   {asset.iframe ? (
                     <iframe
-                      src={asset.iframe}
+                      src={getIframeSrc(asset)}
                       className="w-full h-full object-cover pointer-events-none"
                       allow="autoplay; encrypted-media"
                       allowFullScreen
@@ -130,6 +140,22 @@ function CategorySlider({ category, index }: { category: Category; index: number
                     />
                   ) : null}
                 </div>
+                {asset.iframe && (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    size="icon"
+                    aria-label={unmutedVideos[asset.id] ? `Mute ${asset.title}` : `Unmute ${asset.title}`}
+                    title={unmutedVideos[asset.id] ? "Mute video" : "Unmute video"}
+                    className="absolute right-3 top-3 z-20 h-9 w-9 rounded-full border border-border/40 bg-background/80 backdrop-blur-sm"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      setUnmutedVideos((current) => ({ ...current, [asset.id]: !current[asset.id] }));
+                    }}
+                  >
+                    {unmutedVideos[asset.id] ? <Volume2 /> : <VolumeX />}
+                  </Button>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
                   <p className="text-foreground font-medium text-sm">{asset.title}</p>
