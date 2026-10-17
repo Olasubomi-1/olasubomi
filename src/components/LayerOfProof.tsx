@@ -1,5 +1,5 @@
-import { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useState, useMemo } from "react";
+import { motion, useReducedMotion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -72,10 +72,10 @@ const categories: Category[] = [
     id: "3d-renders",
     title: "3D Product Renders",
     assets: [
-      { id: 10, image: project1, title: "Product Render 1" },
-      { id: 11, image: project2, title: "Product Render 2" },
-      { id: 12, image: project3, title: "Product Render 3" },
-      { id: 13, image: project4, title: "Product Render 4" },
+      { id: 10, image: project1, title: "3D Product Render — 01" },
+      { id: 11, image: project2, title: "3D Product Render — 02" },
+      { id: 12, image: project3, title: "3D Product Render — 03" },
+      { id: 13, image: project4, title: "3D Product Render — 04" },
       { id: 18, image: renderAuroe, title: "Auroe Product Render" },
       { id: 19, video: render3dVideo, title: "3D Product Animation" },
       { id: 20, video: perfumeVideo, title: "3D Perfume Animation" },
@@ -83,14 +83,18 @@ const categories: Category[] = [
   },
 ];
 
-const tabLabels = ["Motion Visuals", "Long Form Videos", "Short Form Content"];
-// Note: "3D Product Renders" (categories[3]) is temporarily hidden. Re-add "3D Product Renders" to tabLabels to restore.
+const tabLabels = ["Motion Visuals", "Long Form Videos", "Short Form Content", "3D Product Renders"];
 
 /* ── Video/Iframe Slider ── */
 function CategorySlider({ category, index }: { category: Category; index: number }) {
+  const prefersReducedMotion = useReducedMotion();
+  const autoplay = useMemo(
+    () => prefersReducedMotion ? [] : [Autoplay({ delay: 4000 + index * 1000, stopOnInteraction: true })],
+    [index, prefersReducedMotion]
+  );
   const [emblaRef] = useEmblaCarousel(
     { loop: true, align: "start", dragFree: true },
-    [Autoplay({ delay: 4000 + index * 1000, stopOnInteraction: false })]
+    autoplay
   );
   const [expandedMedia, setExpandedMedia] = useState<{ src: string; type: "video" | "iframe" } | null>(null);
   const [unmutedVideos, setUnmutedVideos] = useState<Record<number, boolean>>({});
@@ -117,7 +121,16 @@ function CategorySlider({ category, index }: { category: Category; index: number
               transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <div
-                className="group relative overflow-hidden rounded-2xl border border-border/30 cursor-pointer hover-lift"
+                role="button"
+                tabIndex={0}
+                aria-label={`Open ${asset.title}`}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    handleClick(asset);
+                  }
+                }}
+                className="group relative overflow-hidden rounded-2xl border border-border/30 cursor-pointer hover-lift focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
                 onClick={() => handleClick(asset)}
               >
                 <div className="aspect-[4/5] overflow-hidden bg-card">
@@ -125,6 +138,8 @@ function CategorySlider({ category, index }: { category: Category; index: number
                     <iframe
                       src={getIframeSrc(asset)}
                       className="w-full h-full object-cover pointer-events-none"
+                      title={asset.title}
+                      loading="lazy"
                       allow="autoplay; encrypted-media"
                       allowFullScreen
                       style={{ border: "none" }}
@@ -196,6 +211,7 @@ function CategorySlider({ category, index }: { category: Category; index: number
 
 /* ── Image/Video Gallery with lightbox ── */
 function ImageGallery({ category }: { category: Category }) {
+  const prefersReducedMotion = useReducedMotion();
   const [lightbox, setLightbox] = useState<{ src: string; type: "image" | "video" } | null>(null);
 
   const handleClick = (asset: Asset) => {
@@ -212,8 +228,17 @@ function ImageGallery({ category }: { category: Category }) {
         {category.assets.map((asset) => (
           <motion.div
             key={asset.id}
-            className="flex-shrink-0 w-[280px] md:w-[320px] group cursor-pointer"
-            whileHover={{ scale: 1.03 }}
+            role="button"
+            tabIndex={0}
+            aria-label={`View ${asset.title}`}
+            onKeyDown={(event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                handleClick(asset);
+              }
+            }}
+            className="flex-shrink-0 w-[280px] md:w-[320px] group cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+            whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }}
             transition={{ duration: 0.3 }}
             onClick={() => handleClick(asset)}
           >
@@ -270,7 +295,6 @@ function ImageGallery({ category }: { category: Category }) {
 /* ── Main Section ── */
 export default function LayerOfProof() {
   const [activeTab, setActiveTab] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
 
   return (
     <section id="work" className="py-24 md:py-32 relative overflow-hidden">
@@ -292,10 +316,14 @@ export default function LayerOfProof() {
         </motion.div>
 
         {/* Tabs */}
-        <div className="flex flex-wrap gap-3 mb-12">
+        <div className="flex flex-wrap gap-3 mb-12" role="tablist" aria-label="Portfolio categories">
           {tabLabels.map((label, i) => (
             <button
               key={label}
+              role="tab"
+              id={`portfolio-tab-${i}`}
+              aria-selected={activeTab === i}
+              aria-controls="portfolio-panel"
               onClick={() => setActiveTab(i)}
               className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                 activeTab === i
@@ -310,9 +338,13 @@ export default function LayerOfProof() {
 
         {/* Content */}
         <motion.div
+          id="portfolio-panel"
+          role="tabpanel"
+          aria-labelledby={`portfolio-tab-${activeTab}`}
+          tabIndex={0}
           key={activeTab}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+          animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
           {activeTab === 3 ? (
