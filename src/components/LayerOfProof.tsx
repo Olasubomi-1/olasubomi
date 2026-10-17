@@ -1,23 +1,15 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
-import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { X, Search, Volume2, VolumeX } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import TiltedGridHero, { type TiltedGridImage } from "@/components/ui/tilted-grid-hero";
+import { Play, Search } from "lucide-react";
 
 import visualIdentityVideo from "@/assets/visual-identity.mp4";
 import productAnimationVideo from "@/assets/product-animation.mp4";
-import sassAnimationVideo from "@/assets/sass-animation.mp4";
 import sunbruLogoVideo from "@/assets/sunbru-logo-intro.mp4";
-import lastnVideo from "@/assets/lastn.mp4";
 import render3dVideo from "@/assets/3d-product-video.mp4";
 import perfumeVideo from "@/assets/3d-perfume-animation.mp4";
 import whatsgamePromoVideo from "@/assets/whatsgame-promo.mp4";
 import renderAuroe from "@/assets/3d-render-auroe.jpg";
-
-import project4 from "@/assets/project-4.jpg";
 
 type Asset = {
   id: number;
@@ -70,7 +62,6 @@ const categories: Category[] = [
     id: "3d-renders",
     title: "3D Product Renders",
     assets: [
-      { id: 13, image: project4, title: "3D Product Render — 04" },
       { id: 18, image: renderAuroe, title: "Auroe Product Render" },
       { id: 19, video: render3dVideo, title: "3D Product Animation" },
       { id: 20, video: perfumeVideo, title: "3D Perfume Animation" },
@@ -78,172 +69,58 @@ const categories: Category[] = [
   },
 ];
 
-const tabLabels = ["Motion Visuals", "Long Form Videos", "Short Form Content", "3D Product Renders"];
 
-const featuredWorkImages: TiltedGridImage[] = [
-  { src: visualIdentityVideo, mediaType: "video", title: "SaaS Video", alt: "SaaS brand motion design" },
-  { src: productAnimationVideo, mediaType: "video", title: "App Promo", alt: "Product animation for an app" },
-  { src: sunbruLogoVideo, mediaType: "video", title: "Logo Intro", alt: "Sunbru logo animation" },
-  { src: whatsgamePromoVideo, mediaType: "video", title: "Promo Video", alt: "WhatsGame promo animation" },
-  { src: renderAuroe, title: "Auroe Product Render", alt: "Auroe product render" },
-  { src: render3dVideo, mediaType: "video", title: "3D Product Animation", alt: "3D product animation" },
-  { src: project4, title: "3D Product Render 04", alt: "3D product render" },
-  { src: perfumeVideo, mediaType: "video", title: "3D Perfume Animation", alt: "3D perfume animation" },
-];
+type PreviewMedia = {
+  src: string;
+  title: string;
+  type: "video" | "iframe" | "image";
+};
 
-/* ── Video/Iframe Slider ── */
-function CategorySlider({ category, index }: { category: Category; index: number }) {
-  const prefersReducedMotion = useReducedMotion();
-  const autoplay = useMemo(
-    () => prefersReducedMotion ? [] : [Autoplay({ delay: 4000 + index * 1000, stopOnInteraction: true })],
-    [index, prefersReducedMotion]
-  );
-  const [emblaRef] = useEmblaCarousel(
-    { loop: true, align: "start", dragFree: true },
-    autoplay
-  );
-  const [expandedMedia, setExpandedMedia] = useState<{ src: string; type: "video" | "iframe" } | null>(null);
-  const [unmutedVideos, setUnmutedVideos] = useState<Record<number, boolean>>({});
-
-  const getIframeSrc = (asset: Asset) => {
-    if (!asset.iframe || !unmutedVideos[asset.id]) return asset.iframe;
-    return asset.iframe.replace("mute=1", "mute=0");
-  };
-
-  const handleClick = (asset: Asset) => {
-    if (asset.video) setExpandedMedia({ src: asset.video, type: "video" });
-    else if (asset.iframe) setExpandedMedia({ src: asset.iframe, type: "iframe" });
-  };
-
-  return (
-    <>
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex gap-6">
-          {category.assets.map((asset) => (
-            <motion.div
-              key={asset.id}
-              className="flex-[0_0_80%] sm:flex-[0_0_55%] md:flex-[0_0_42%] lg:flex-[0_0_32%] min-w-0"
-              whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
-              transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              <div className="group relative overflow-hidden rounded-2xl border border-border/30 hover-lift" role="group" aria-label={asset.title}>
-                <div className="aspect-[4/5] overflow-hidden bg-card">
-                  {asset.iframe ? (
-                    <iframe
-                      src={getIframeSrc(asset)}
-                      className="w-full h-full object-cover pointer-events-none"
-                      title={asset.title}
-                      loading="lazy"
-                      allow="autoplay; encrypted-media"
-                      allowFullScreen
-                      style={{ border: "none" }}
-                    />
-                  ) : asset.video ? (
-                    <video
-                      src={asset.video}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-full h-full object-cover"
-                    />
-                  ) : null}
-                </div>
-                {asset.iframe && (
-                  <Button
-                    type="button"
-                    variant="secondary"
-                    size="icon"
-                    aria-label={unmutedVideos[asset.id] ? `Mute ${asset.title}` : `Unmute ${asset.title}`}
-                    title={unmutedVideos[asset.id] ? "Mute video" : "Unmute video"}
-                    className="absolute right-3 top-3 z-20 h-9 w-9 rounded-full border border-border/40 bg-background/80 backdrop-blur-sm"
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      setUnmutedVideos((current) => ({ ...current, [asset.id]: !current[asset.id] }));
-                    }}
-                  >
-                    {unmutedVideos[asset.id] ? <Volume2 /> : <VolumeX />}
-                  </Button>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out pointer-events-none">
-                  <p className="text-foreground font-medium text-sm">{asset.title}</p>
-                </div>
-                <button
-                  type="button"
-                  aria-label={`Open ${asset.title}`}
-                  onClick={() => handleClick(asset)}
-                  className="absolute inset-0 z-10 rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
-                />
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      <Dialog open={!!expandedMedia} onOpenChange={() => setExpandedMedia(null)}>
-        <DialogContent className="max-w-5xl w-[95vw] h-[90vh] p-0 bg-background/95 backdrop-blur-xl border-border/30">
-          <button
-            onClick={() => setExpandedMedia(null)}
-            className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-border/30 flex items-center justify-center hover:bg-card transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
-          <div className="w-full h-full flex items-center justify-center p-6">
-            {expandedMedia?.type === "video" && (
-              <video src={expandedMedia.src} autoPlay loop controls playsInline className="max-w-full max-h-full rounded-xl" />
-            )}
-            {expandedMedia?.type === "iframe" && (
-              <iframe
-                src={expandedMedia.src.replace("mute=1", "mute=0")}
-                className="w-full h-full rounded-xl"
-                allow="autoplay; encrypted-media"
-                allowFullScreen
-                style={{ border: "none" }}
-              />
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
-  );
+function getIframePreviewSrc(src: string) {
+  const url = new URL(src);
+  url.searchParams.set("autoplay", "1");
+  url.searchParams.set("mute", "0");
+  url.searchParams.set("controls", "1");
+  url.searchParams.delete("loop");
+  url.searchParams.delete("playlist");
+  return url.toString();
 }
 
-/* ── Image/Video Gallery with lightbox ── */
-function ImageGallery({ category }: { category: Category }) {
+function ProjectGrid({
+  category,
+  onPreview,
+}: {
+  category: Category;
+  onPreview: (media: PreviewMedia) => void;
+}) {
   const prefersReducedMotion = useReducedMotion();
-  const [lightbox, setLightbox] = useState<{ src: string; type: "image" | "video" } | null>(null);
-
-  const handleClick = (asset: Asset) => {
-    if (asset.video) {
-      setLightbox({ src: asset.video, type: "video" });
-    } else if (asset.image) {
-      setLightbox({ src: asset.image, type: "image" });
-    }
-  };
 
   return (
-    <>
-      <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
-        {category.assets.map((asset) => (
-          <motion.div
-            key={asset.id}
-            role="button"
-            tabIndex={0}
-            aria-label={`View ${asset.title}`}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" || event.key === " ") {
-                event.preventDefault();
-                handleClick(asset);
-              }
-            }}
-            className="flex-shrink-0 w-[280px] md:w-[320px] group cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
-            whileHover={prefersReducedMotion ? undefined : { scale: 1.03 }}
-            transition={{ duration: 0.3 }}
-            onClick={() => handleClick(asset)}
-          >
-            <div className="relative overflow-hidden rounded-2xl border border-border/30">
-              <div className="aspect-square overflow-hidden bg-card">
+    <motion.div
+      key={category.id}
+      id="portfolio-panel"
+      role="tabpanel"
+      aria-labelledby={`portfolio-tab-${category.id}`}
+      initial={prefersReducedMotion ? false : { opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: prefersReducedMotion ? 0 : 0.25 }}
+      className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+    >
+      {category.assets.map((asset) => {
+        const media = asset.video
+          ? { src: asset.video, title: asset.title, type: "video" as const }
+          : asset.iframe
+            ? { src: asset.iframe, title: asset.title, type: "iframe" as const }
+            : asset.image
+              ? { src: asset.image, title: asset.title, type: "image" as const }
+              : null;
+
+        if (!media) return null;
+
+        return (
+          <article key={asset.id} className="group min-w-0">
+            <div className="relative overflow-hidden rounded-2xl border border-border/30 bg-card">
+              <div className="aspect-video overflow-hidden">
                 {asset.video ? (
                   <video
                     src={asset.video}
@@ -251,161 +128,138 @@ function ImageGallery({ category }: { category: Category }) {
                     loop
                     muted
                     playsInline
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    preload="metadata"
+                    className="h-full w-full object-cover"
+                  />
+                ) : asset.iframe ? (
+                  <iframe
+                    src={asset.iframe}
+                    title={asset.title}
+                    loading="lazy"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    className="pointer-events-none h-full w-full"
+                    style={{ border: "none" }}
                   />
                 ) : (
                   <img
                     src={asset.image}
                     alt={asset.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 )}
               </div>
-              <div className="absolute inset-0 bg-background/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                <Search className="w-6 h-6 text-foreground" />
-              </div>
+              <button
+                type="button"
+                aria-label={`Preview ${asset.title}`}
+                onClick={() => onPreview(media)}
+                className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors duration-300 hover:bg-black/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+              >
+                <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/40 bg-black/65 text-white opacity-0 shadow-lg backdrop-blur-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+                  {media.type === "image" ? <Search className="h-5 w-5" /> : <Play className="h-5 w-5 fill-current" />}
+                </span>
+              </button>
             </div>
-            <p className="text-sm text-muted-foreground mt-3 text-center">{asset.title}</p>
-          </motion.div>
-        ))}
-      </div>
-
-      <Dialog open={!!lightbox} onOpenChange={() => setLightbox(null)}>
-        <DialogContent className="max-w-4xl w-[95vw] p-0 bg-background/95 backdrop-blur-xl border-border/30">
-          <button
-            onClick={() => setLightbox(null)}
-            className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm border border-border/30 flex items-center justify-center hover:bg-card transition-colors"
-          >
-            <X className="w-5 h-5" />
-          </button>
-          <div className="p-6 flex items-center justify-center">
-            {lightbox?.type === "image" && (
-              <img src={lightbox.src} alt="" className="w-full h-auto rounded-xl" />
-            )}
-            {lightbox?.type === "video" && (
-              <video src={lightbox.src} autoPlay loop controls playsInline className="max-w-full max-h-[80vh] rounded-xl" />
-            )}
-          </div>
-        </DialogContent>
-      </Dialog>
-    </>
+            <p className="mt-3 text-sm font-medium text-foreground">{asset.title}</p>
+          </article>
+        );
+      })}
+    </motion.div>
   );
 }
 
-/* ── Main Section ── */
 export default function LayerOfProof() {
-  const prefersReducedMotion = useReducedMotion();
   const [activeTab, setActiveTab] = useState(0);
-  const [featuredPreview, setFeaturedPreview] = useState<TiltedGridImage | null>(null);
+  const [preview, setPreview] = useState<PreviewMedia | null>(null);
 
   return (
-    <section id="work" className="py-24 md:py-32 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/[0.05] rounded-full blur-[150px] -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+    <section id="work" className="relative overflow-hidden py-24 md:py-32">
+      <div className="pointer-events-none absolute right-0 top-0 h-[600px] w-[600px] -translate-y-1/2 translate-x-1/3 rounded-full bg-primary/[0.05] blur-[150px]" />
 
-      <div className="container mx-auto px-6 relative z-10">
-        {/* Header */}
+      <div className="container relative z-10 mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="max-w-3xl mb-16"
+          className="mb-12 max-w-3xl"
         >
-          <h2 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">Layer of Proof</h2>
-          <p className="text-muted-foreground text-base md:text-lg">
+          <h2 className="mb-4 text-4xl font-bold tracking-tight md:text-6xl">Layer of Proof</h2>
+          <p className="text-base text-muted-foreground md:text-lg">
             Every category. Every format. Every result.
           </p>
         </motion.div>
 
-        <TiltedGridHero
-          images={featuredWorkImages}
-          onImageClick={setFeaturedPreview}
-          autoPlayVideos={!prefersReducedMotion}
-          speed={5}
-          tileHeight={52}
-          aspectRatio={1.45}
-          gap={6}
-          curve={78}
-          fade={14}
-          className="mb-16 h-[320px] w-full rounded-3xl border border-border/30 bg-card/50 sm:h-[380px] md:h-[460px]"
-          aria-label="Featured motion design and 3D work"
+        <div
+          className="mb-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4"
+          role="tablist"
+          aria-label="Portfolio categories"
         >
-          <div className="pointer-events-none relative z-10 flex h-full items-center justify-center px-6 text-center">
-            <p className="rounded-full border border-border/40 bg-background/75 px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-foreground shadow-lg backdrop-blur-md sm:text-sm">
-              A closer look at my work
-            </p>
-          </div>
-        </TiltedGridHero>
+          {categories.map((category, index) => (
+            <button
+              key={category.id}
+              type="button"
+              role="tab"
+              id={`portfolio-tab-${category.id}`}
+              aria-selected={activeTab === index}
+              aria-controls="portfolio-panel"
+              onClick={() => setActiveTab(index)}
+              className={`rounded-2xl border px-5 py-4 text-left transition-all duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary ${
+                activeTab === index
+                  ? "border-primary/50 bg-primary text-primary-foreground shadow-lg"
+                  : "border-border/40 bg-card/50 text-foreground hover:border-primary/40 hover:bg-card"
+              }`}
+            >
+              <span className="block font-semibold">{category.title}</span>
+              <span className={`mt-1 block text-xs ${activeTab === index ? "text-primary-foreground/75" : "text-muted-foreground"}`}>
+                {category.assets.length} {category.assets.length === 1 ? "project" : "projects"}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        <ProjectGrid
+          category={categories[activeTab]}
+          onPreview={setPreview}
+        />
 
         <Dialog
-          open={!!featuredPreview}
+          open={!!preview}
           onOpenChange={(open) => {
-            if (!open) setFeaturedPreview(null);
+            if (!open) setPreview(null);
           }}
         >
           <DialogContent className="w-[95vw] max-w-6xl border-border/30 bg-background/95 p-4 backdrop-blur-xl sm:p-6">
-            <DialogTitle className="sr-only">
-              {featuredPreview?.title ?? "Project preview"}
-            </DialogTitle>
+            <DialogTitle className="sr-only">{preview?.title ?? "Project preview"}</DialogTitle>
             <div className="flex min-h-[45vh] w-full items-center justify-center">
-              {featuredPreview?.mediaType === "video" ? (
+              {preview?.type === "video" ? (
                 <video
-                  key={featuredPreview.src}
-                  src={featuredPreview.src}
+                  key={preview.src}
+                  src={preview.src}
                   autoPlay
                   controls
                   playsInline
                   className="max-h-[78vh] max-w-full rounded-xl bg-black"
                 />
-              ) : featuredPreview ? (
+              ) : preview?.type === "iframe" ? (
+                <iframe
+                  key={preview.src}
+                  src={getIframePreviewSrc(preview.src)}
+                  title={preview.title}
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  allowFullScreen
+                  className="aspect-video w-full rounded-xl"
+                  style={{ border: "none" }}
+                />
+              ) : preview?.type === "image" ? (
                 <img
-                  src={featuredPreview.src}
-                  alt={featuredPreview.alt ?? featuredPreview.title ?? "Project preview"}
+                  src={preview.src}
+                  alt={preview.title}
                   className="max-h-[78vh] max-w-full rounded-xl object-contain"
                 />
               ) : null}
             </div>
           </DialogContent>
         </Dialog>
-
-        {/* Tabs */}
-        <div className="flex flex-wrap gap-3 mb-12" role="tablist" aria-label="Portfolio categories">
-          {tabLabels.map((label, i) => (
-            <button
-              key={label}
-              role="tab"
-              id={`portfolio-tab-${i}`}
-              aria-selected={activeTab === i}
-              aria-controls="portfolio-panel"
-              onClick={() => setActiveTab(i)}
-              className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                activeTab === i
-                  ? "bg-primary text-primary-foreground shadow-lg"
-                  : "border border-border/40 text-muted-foreground hover:text-foreground hover:border-primary/30"
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-        </div>
-
-        {/* Content */}
-        <motion.div
-          id="portfolio-panel"
-          role="tabpanel"
-          aria-labelledby={`portfolio-tab-${activeTab}`}
-          tabIndex={0}
-          key={activeTab}
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-          animate={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          {activeTab === 3 ? (
-            <ImageGallery category={categories[3]} />
-          ) : (
-            <CategorySlider category={categories[activeTab]} index={activeTab} />
-          )}
-        </motion.div>
       </div>
     </section>
   );
