@@ -47,20 +47,14 @@ export default function QuotePage() {
   };
 
   const submit = async () => {
-    if (!answers.name || !answers.email) {
+    if (!answers.name?.trim() || !answers.email?.trim()) {
       toast.error("Please fill in your name and email.");
       return;
     }
-    const timestamp = new Date().toISOString();
-    const payload = { ...answers, timestamp };
-
-    // Persist locally as a lead
-    try {
-      const existing = JSON.parse(localStorage.getItem("quote_leads") || "[]");
-      existing.push(payload);
-      localStorage.setItem("quote_leads", JSON.stringify(existing));
-    } catch {}
-
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(answers.email.trim())) {
+      toast.error("Please enter a valid email address.");
+      return;
+    }
     setSending(true);
     try {
       const { data, error } = await supabase.functions.invoke("send-quote", {
@@ -103,7 +97,7 @@ export default function QuotePage() {
                 <Check className="w-8 h-8 text-primary" />
               </div>
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
-                Got it. Quote's on its way.
+                Thanks — your request has been sent.
               </h1>
               <p className="text-muted-foreground text-base md:text-lg">
                 I'll review your answers and get back to you within 24 hours.
@@ -177,8 +171,12 @@ export default function QuotePage() {
                       </p>
                       <div className="space-y-4">
                         <div>
-                          <label className="text-sm text-muted-foreground mb-2 block">Name</label>
+                          <label htmlFor="quote-name" className="text-sm text-muted-foreground mb-2 block">Name <span aria-hidden="true">*</span></label>
                           <Input
+                            id="quote-name"
+                            name="name"
+                            autoComplete="name"
+                            required
                             value={answers.name || ""}
                             onChange={(e) => setAnswers({ ...answers, name: e.target.value })}
                             placeholder="Your name"
@@ -186,9 +184,13 @@ export default function QuotePage() {
                           />
                         </div>
                         <div>
-                          <label className="text-sm text-muted-foreground mb-2 block">Email</label>
+                          <label htmlFor="quote-email" className="text-sm text-muted-foreground mb-2 block">Email <span aria-hidden="true">*</span></label>
                           <Input
+                            id="quote-email"
+                            name="email"
                             type="email"
+                            autoComplete="email"
+                            required
                             value={answers.email || ""}
                             onChange={(e) => setAnswers({ ...answers, email: e.target.value })}
                             placeholder="you@example.com"
@@ -196,10 +198,12 @@ export default function QuotePage() {
                           />
                         </div>
                         <div>
-                          <label className="text-sm text-muted-foreground mb-2 block">
+                          <label htmlFor="quote-notes" className="text-sm text-muted-foreground mb-2 block">
                             Anything else I should know? <span className="text-muted-foreground/60">(optional)</span>
                           </label>
                           <Textarea
+                            id="quote-notes"
+                            name="notes"
                             value={answers.notes || ""}
                             onChange={(e) => setAnswers({ ...answers, notes: e.target.value })}
                             placeholder="Project details, references, deadlines..."
@@ -209,12 +213,19 @@ export default function QuotePage() {
                         <Button
                           onClick={submit}
                           disabled={sending}
+                          type="button"
                           size="lg"
                           className="w-full rounded-full py-6 text-base font-semibold tracking-wide shadow-lg hover:shadow-glow mt-2"
                         >
                           {sending ? "Sending..." : "Send my quote request"}
                           <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
+                        <p className="text-center text-sm text-muted-foreground">
+                          If the form does not go through, email{" "}
+                          <a className="text-primary underline underline-offset-4" href="mailto:olasubomiafolayan@gmail.com">
+                            olasubomiafolayan@gmail.com
+                          </a>.
+                        </p>
                       </div>
                     </div>
                   )}

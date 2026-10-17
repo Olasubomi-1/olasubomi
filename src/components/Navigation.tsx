@@ -39,7 +39,7 @@ const Navigation = () => {
     ] : []),
     { name: "What I Do", id: "services", type: "services" as const },
     { name: "About", id: "/about", type: "link" as const },
-    { name: "Insights", id: "/blog", type: "link" as const },
+    { name: "Insights", id: "/insights", type: "link" as const },
     ...(isHome ? [
       { name: "Contact", id: "contact", type: "scroll" as const },
     ] : []),
