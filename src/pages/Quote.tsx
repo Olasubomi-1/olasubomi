@@ -47,8 +47,12 @@ export default function QuotePage() {
   };
 
   const submit = async () => {
-    if (!answers.name || !answers.email) {
+    if (!answers.name?.trim() || !answers.email?.trim()) {
       toast.error("Please fill in your name and email.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(answers.email.trim())) {
+      toast.error("Please enter a valid email address.");
       return;
     }
      setSending(true);
@@ -216,6 +220,12 @@ export default function QuotePage() {
                           {sending ? "Sending..." : "Send my quote request"}
                           <ArrowRight className="w-4 h-4 ml-2" />
                         </Button>
+                        <p className="text-center text-sm text-muted-foreground">
+                          If the form does not go through, email{" "}
+                          <a className="text-primary underline underline-offset-4" href="mailto:olasubomiafolayan@gmail.com">
+                            olasubomiafolayan@gmail.com
+                          </a>.
+                        </p>
                       </div>
                     </div>
                   )}
