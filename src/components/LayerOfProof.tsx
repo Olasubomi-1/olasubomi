@@ -17,9 +17,6 @@ import perfumeVideo from "@/assets/3d-perfume-animation.mp4";
 import whatsgamePromoVideo from "@/assets/whatsgame-promo.mp4";
 import renderAuroe from "@/assets/3d-render-auroe.jpg";
 
-import project1 from "@/assets/project-1.jpg";
-import project2 from "@/assets/project-2.jpg";
-import project3 from "@/assets/project-3.jpg";
 import project4 from "@/assets/project-4.jpg";
 
 type Asset = {
@@ -73,9 +70,6 @@ const categories: Category[] = [
     id: "3d-renders",
     title: "3D Product Renders",
     assets: [
-      { id: 10, image: project1, title: "3D Product Render — 01" },
-      { id: 11, image: project2, title: "3D Product Render — 02" },
-      { id: 12, image: project3, title: "3D Product Render — 03" },
       { id: 13, image: project4, title: "3D Product Render — 04" },
       { id: 18, image: renderAuroe, title: "Auroe Product Render" },
       { id: 19, video: render3dVideo, title: "3D Product Animation" },
@@ -88,11 +82,8 @@ const tabLabels = ["Motion Visuals", "Long Form Videos", "Short Form Content", "
 
 const featuredWorkImages: TiltedGridImage[] = [
   { src: visualIdentityVideo, mediaType: "video", title: "SaaS Video", alt: "SaaS brand motion design" },
-  { src: project1, title: "3D Product Render 01", alt: "3D product render" },
   { src: productAnimationVideo, mediaType: "video", title: "App Promo", alt: "Product animation for an app" },
-  { src: project2, title: "3D Product Render 02", alt: "3D product render" },
   { src: sunbruLogoVideo, mediaType: "video", title: "Logo Intro", alt: "Sunbru logo animation" },
-  { src: project3, title: "3D Product Render 03", alt: "3D product render" },
   { src: whatsgamePromoVideo, mediaType: "video", title: "Promo Video", alt: "WhatsGame promo animation" },
   { src: renderAuroe, title: "Auroe Product Render", alt: "Auroe product render" },
   { src: render3dVideo, mediaType: "video", title: "3D Product Animation", alt: "3D product animation" },
