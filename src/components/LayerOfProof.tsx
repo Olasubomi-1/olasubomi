@@ -5,6 +5,7 @@ import Autoplay from "embla-carousel-autoplay";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { X, Search, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import TiltedGridHero from "@/components/ui/tilted-grid-hero";
 
 import visualIdentityVideo from "@/assets/visual-identity.mp4";
 import productAnimationVideo from "@/assets/product-animation.mp4";
@@ -84,6 +85,17 @@ const categories: Category[] = [
 ];
 
 const tabLabels = ["Motion Visuals", "Long Form Videos", "Short Form Content", "3D Product Renders"];
+
+const featuredWorkImages = [
+  { src: "https://i.ytimg.com/vi/u1imsQsZoZ8/hqdefault.jpg", alt: "Bread Ad motion design project" },
+  { src: project1, alt: "3D product render" },
+  { src: "https://i.ytimg.com/vi/DuvhryPBhcQ/hqdefault.jpg", alt: "MyCharrg launch animation" },
+  { src: project2, alt: "3D product render" },
+  { src: "https://i.ytimg.com/vi/5LcH0AZr9QU/hqdefault.jpg", alt: "PureFi launch animation" },
+  { src: project3, alt: "3D product render" },
+  { src: renderAuroe, alt: "Auroe product render" },
+  { src: project4, alt: "3D product render" },
+];
 
 /* ── Video/Iframe Slider ── */
 function CategorySlider({ category, index }: { category: Category; index: number }) {
@@ -309,6 +321,24 @@ export default function LayerOfProof() {
             Every category. Every format. Every result.
           </p>
         </motion.div>
+
+        <TiltedGridHero
+          images={featuredWorkImages}
+          speed={5}
+          tileHeight={52}
+          aspectRatio={1.45}
+          gap={6}
+          curve={78}
+          fade={14}
+          className="mb-16 h-[320px] w-full rounded-3xl border border-border/30 bg-card/50 sm:h-[380px] md:h-[460px]"
+          aria-label="Featured motion design and 3D work"
+        >
+          <div className="pointer-events-none relative z-10 flex h-full items-center justify-center px-6 text-center">
+            <p className="rounded-full border border-border/40 bg-background/75 px-5 py-3 text-xs font-semibold uppercase tracking-[0.18em] text-foreground shadow-lg backdrop-blur-md sm:text-sm">
+              A closer look at my work
+            </p>
+          </div>
+        </TiltedGridHero>
 
         {/* Tabs */}
         <div className="flex flex-wrap gap-3 mb-12" role="tablist" aria-label="Portfolio categories">
