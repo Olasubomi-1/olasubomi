@@ -120,19 +120,7 @@ function CategorySlider({ category, index }: { category: Category; index: number
               whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <div
-                role="button"
-                tabIndex={0}
-                aria-label={`Open ${asset.title}`}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault();
-                    handleClick(asset);
-                  }
-                }}
-                className="group relative overflow-hidden rounded-2xl border border-border/30 cursor-pointer hover-lift focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
-                onClick={() => handleClick(asset)}
-              >
+              <div className="group relative overflow-hidden rounded-2xl border border-border/30 hover-lift" role="group" aria-label={asset.title}>
                 <div className="aspect-[4/5] overflow-hidden bg-card">
                   {asset.iframe ? (
                     <iframe
@@ -172,9 +160,15 @@ function CategorySlider({ category, index }: { category: Category; index: number
                   </Button>
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out">
+                <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out pointer-events-none">
                   <p className="text-foreground font-medium text-sm">{asset.title}</p>
                 </div>
+                <button
+                  type="button"
+                  aria-label={`Open ${asset.title}`}
+                  onClick={() => handleClick(asset)}
+                  className="absolute inset-0 z-10 rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2"
+                />
               </div>
             </motion.div>
           ))}
@@ -294,6 +288,7 @@ function ImageGallery({ category }: { category: Category }) {
 
 /* ── Main Section ── */
 export default function LayerOfProof() {
+  const prefersReducedMotion = useReducedMotion();
   const [activeTab, setActiveTab] = useState(0);
 
   return (
