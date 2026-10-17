@@ -117,7 +117,7 @@ function CategorySlider({ category, index }: { category: Category; index: number
             <motion.div
               key={asset.id}
               className="flex-[0_0_80%] sm:flex-[0_0_55%] md:flex-[0_0_42%] lg:flex-[0_0_32%] min-w-0"
-              whileHover={{ scale: 1.02 }}
+              whileHover={prefersReducedMotion ? undefined : { scale: 1.02 }}
               transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <div className="group relative overflow-hidden rounded-2xl border border-border/30 hover-lift" role="group" aria-label={asset.title}>
