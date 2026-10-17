@@ -1,10 +1,10 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { useCallback, useMemo, useState, useRef, useEffect } from "react";
 import { ArrowDown, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroVideo from "@/assets/tawk-crypto-hero.mp4";
 
-function FloatingPaths({ position }: { position: number }) {
+function FloatingPaths({ position, reducedMotion }: { position: number; reducedMotion: boolean }) {
   const paths = useMemo(() => {
     return Array.from({ length: 36 }, (_, i) => ({
       id: i,
@@ -31,13 +31,13 @@ function FloatingPaths({ position }: { position: number }) {
             stroke="var(--path-stroke)"
             strokeWidth={path.strokeWidth}
             strokeOpacity={path.opacity + 0.1}
-            initial={{ pathLength: 0.3, opacity: 0.2 }}
-            animate={{
+            initial={reducedMotion ? false : { pathLength: 0.3, opacity: 0.2 }}
+            animate={reducedMotion ? { opacity: path.opacity + 0.1 } : {
               pathLength: 1,
               opacity: [0.15, 0.35, 0.15],
               pathOffset: [0, 1, 0],
             }}
-            transition={{
+            transition={reducedMotion ? { duration: 0 } : {
               duration: path.duration,
               repeat: Infinity,
               ease: "linear",
@@ -51,6 +51,7 @@ function FloatingPaths({ position }: { position: number }) {
 
 export default function BackgroundPaths() {
   const title = "Motion Graphics & 3D Animation";
+  const prefersReducedMotion = useReducedMotion();
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -72,7 +73,7 @@ export default function BackgroundPaths() {
       style={{ backgroundColor: "hsl(var(--hero-bg))" }}
     >
       {/* Video background */}
-      {!isMobile && (
+      {!isMobile && !prefersReducedMotion && (
         <video
           ref={videoRef}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${videoLoaded ? 'opacity-100' : 'opacity-0'}`}
@@ -100,17 +101,17 @@ export default function BackgroundPaths() {
       {/* Fallback animated paths (visible when video not loaded or on mobile) */}
       {(!videoLoaded || isMobile) && (
         <div className="absolute inset-0">
-          <FloatingPaths position={1} />
-          <FloatingPaths position={-1} />
+          <FloatingPaths position={1} reducedMotion={!!prefersReducedMotion} />
+          <FloatingPaths position={-1} reducedMotion={!!prefersReducedMotion} />
         </div>
       )}
 
       <div className="relative z-10 container mx-auto px-6 text-center">
         <AnimatePresence>
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={prefersReducedMotion ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.5 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 1.5 }}
             className="space-y-8"
           >
             <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter">
@@ -119,7 +120,7 @@ export default function BackgroundPaths() {
                   {word.split("").map((letter, letterIndex) => (
                     <motion.span
                       key={`${wordIndex}-${letterIndex}`}
-                      initial={{ y: 100, opacity: 0, rotateX: -80 }}
+                      initial={prefersReducedMotion ? false : { y: 100, opacity: 0, rotateX: -80 }}
                       animate={{ y: 0, opacity: 1, rotateX: 0 }}
                       transition={{
                         delay: 0.5 + (wordIndex * 5 + letterIndex) * 0.04,
@@ -142,8 +143,7 @@ export default function BackgroundPaths() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.8, duration: 0.8 }}
             >
-              I create cinematic product animations, app promo videos and explainer
-              content that converts viewers into buyers
+              I help SaaS and product brands turn complex features into polished launch videos and product animations.
             </motion.p>
 
             <motion.div
