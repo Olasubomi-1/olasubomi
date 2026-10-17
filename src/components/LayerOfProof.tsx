@@ -2,10 +2,10 @@ import { useState, useMemo } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { X, Search, Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import TiltedGridHero from "@/components/ui/tilted-grid-hero";
+import TiltedGridHero, { type TiltedGridImage } from "@/components/ui/tilted-grid-hero";
 
 import visualIdentityVideo from "@/assets/visual-identity.mp4";
 import productAnimationVideo from "@/assets/product-animation.mp4";
@@ -86,15 +86,18 @@ const categories: Category[] = [
 
 const tabLabels = ["Motion Visuals", "Long Form Videos", "Short Form Content", "3D Product Renders"];
 
-const featuredWorkImages = [
-  { src: "https://i.ytimg.com/vi/u1imsQsZoZ8/hqdefault.jpg", alt: "Bread Ad motion design project" },
-  { src: project1, alt: "3D product render" },
-  { src: "https://i.ytimg.com/vi/DuvhryPBhcQ/hqdefault.jpg", alt: "MyCharrg launch animation" },
-  { src: project2, alt: "3D product render" },
-  { src: "https://i.ytimg.com/vi/5LcH0AZr9QU/hqdefault.jpg", alt: "PureFi launch animation" },
-  { src: project3, alt: "3D product render" },
-  { src: renderAuroe, alt: "Auroe product render" },
-  { src: project4, alt: "3D product render" },
+const featuredWorkImages: TiltedGridImage[] = [
+  { src: visualIdentityVideo, mediaType: "video", title: "SaaS Video", alt: "SaaS brand motion design" },
+  { src: project1, title: "3D Product Render 01", alt: "3D product render" },
+  { src: productAnimationVideo, mediaType: "video", title: "App Promo", alt: "Product animation for an app" },
+  { src: project2, title: "3D Product Render 02", alt: "3D product render" },
+  { src: sunbruLogoVideo, mediaType: "video", title: "Logo Intro", alt: "Sunbru logo animation" },
+  { src: project3, title: "3D Product Render 03", alt: "3D product render" },
+  { src: whatsgamePromoVideo, mediaType: "video", title: "Promo Video", alt: "WhatsGame promo animation" },
+  { src: renderAuroe, title: "Auroe Product Render", alt: "Auroe product render" },
+  { src: render3dVideo, mediaType: "video", title: "3D Product Animation", alt: "3D product animation" },
+  { src: project4, title: "3D Product Render 04", alt: "3D product render" },
+  { src: perfumeVideo, mediaType: "video", title: "3D Perfume Animation", alt: "3D perfume animation" },
 ];
 
 /* ── Video/Iframe Slider ── */
@@ -302,6 +305,7 @@ function ImageGallery({ category }: { category: Category }) {
 export default function LayerOfProof() {
   const prefersReducedMotion = useReducedMotion();
   const [activeTab, setActiveTab] = useState(0);
+  const [featuredPreview, setFeaturedPreview] = useState<TiltedGridImage | null>(null);
 
   return (
     <section id="work" className="py-24 md:py-32 relative overflow-hidden">
@@ -324,6 +328,8 @@ export default function LayerOfProof() {
 
         <TiltedGridHero
           images={featuredWorkImages}
+          onImageClick={setFeaturedPreview}
+          autoPlayVideos={!prefersReducedMotion}
           speed={5}
           tileHeight={52}
           aspectRatio={1.45}
@@ -339,6 +345,37 @@ export default function LayerOfProof() {
             </p>
           </div>
         </TiltedGridHero>
+
+        <Dialog
+          open={!!featuredPreview}
+          onOpenChange={(open) => {
+            if (!open) setFeaturedPreview(null);
+          }}
+        >
+          <DialogContent className="w-[95vw] max-w-6xl border-border/30 bg-background/95 p-4 backdrop-blur-xl sm:p-6">
+            <DialogTitle className="sr-only">
+              {featuredPreview?.title ?? "Project preview"}
+            </DialogTitle>
+            <div className="flex min-h-[45vh] w-full items-center justify-center">
+              {featuredPreview?.mediaType === "video" ? (
+                <video
+                  key={featuredPreview.src}
+                  src={featuredPreview.src}
+                  autoPlay
+                  controls
+                  playsInline
+                  className="max-h-[78vh] max-w-full rounded-xl bg-black"
+                />
+              ) : featuredPreview ? (
+                <img
+                  src={featuredPreview.src}
+                  alt={featuredPreview.alt ?? featuredPreview.title ?? "Project preview"}
+                  className="max-h-[78vh] max-w-full rounded-xl object-contain"
+                />
+              ) : null}
+            </div>
+          </DialogContent>
+        </Dialog>
 
         {/* Tabs */}
         <div className="flex flex-wrap gap-3 mb-12" role="tablist" aria-label="Portfolio categories">
