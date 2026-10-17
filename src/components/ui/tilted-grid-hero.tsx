@@ -88,9 +88,47 @@ function measure(
 
 export type TiltedGridImage = {
   src: string;
-  /** Only used if you drop the decorative treatment; the band is aria-hidden. */
   alt?: string;
+  title?: string;
+  mediaType?: "image" | "video";
 };
+
+function AutoplayTileVideo({ src, title, enabled }: { src: string; title?: string; enabled: boolean }) {
+  const ref = React.useRef<HTMLVideoElement>(null);
+
+  React.useEffect(() => {
+    const video = ref.current;
+    if (!video || !enabled) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        void video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    }, { threshold: 0.2 });
+
+    observer.observe(video);
+    return () => {
+      observer.disconnect();
+      video.pause();
+    };
+  }, [enabled, src]);
+
+  return (
+    <video
+      ref={ref}
+      src={src}
+      aria-label={title}
+      autoPlay={enabled}
+      loop
+      muted
+      playsInline
+      preload="none"
+      className="absolute inset-0 h-full w-full object-cover"
+    />
+  );
+}
 
 export type TiltedGridHeroProps = {
   /**
@@ -123,6 +161,10 @@ export type TiltedGridHeroProps = {
   fade?: number;
   /** Content rendered above the band. */
   children?: React.ReactNode;
+  /** Opens the selected project when a tile is clicked. */
+  onImageClick?: (image: TiltedGridImage) => void;
+  /** Play muted tile videos while they are in view. @default true */
+  autoPlayVideos?: boolean;
   className?: string;
 };
 
@@ -136,6 +178,8 @@ export function TiltedGridHero({
   curve = 80,
   fade = 12,
   children,
+  onImageClick,
+  autoPlayVideos = true,
   className,
   ...props
 }: React.ComponentProps<"div"> & TiltedGridHeroProps) {
@@ -177,7 +221,9 @@ export function TiltedGridHero({
   // Fetch every image up front. A tile picks up its next one just before
   // it comes back into view, too late to start loading it then.
   React.useEffect(() => {
-    for (const { src } of images) new Image().src = src;
+    for (const { src, mediaType } of images) {
+      if (mediaType !== "video") new Image().src = src;
+    }
   }, [images]);
 
   const { columns, sweep, unit, limit } =
@@ -227,8 +273,7 @@ export function TiltedGridHero({
       <style>{css}</style>
 
       <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 transition-opacity duration-500"
+        className="absolute inset-0 transition-opacity duration-500"
         style={{
           opacity: layout ? 1 : 0,
           // A shared vanishing point on the row's centre line, so the ends
@@ -247,7 +292,7 @@ export function TiltedGridHero({
           return (
             <div
               key={t}
-              className={cn(tile, "absolute")}
+              className={cn(tile, "group absolute")}
               style={{
                 left: `calc(50% - ${u(aspectRatio / 2)})`,
                 top: `calc(${axis}% - ${u(0.5)})`,
@@ -266,7 +311,14 @@ export function TiltedGridHero({
                 });
               }}
             >
-              {Array.from({ length: SLICES }, (_, k) => (
+              {img?.mediaType === "video" ? (
+                <AutoplayTileVideo
+                  key={img.src}
+                  src={img.src}
+                  title={img.title ?? img.alt}
+                  enabled={autoPlayVideos}
+                />
+              ) : Array.from({ length: SLICES }, (_, k) => (
                 <div
                   key={k}
                   className={cn(
@@ -304,6 +356,18 @@ export function TiltedGridHero({
                   ) : null}
                 </div>
               ))}
+              {onImageClick && img && (
+                <button
+                  type="button"
+                  aria-label={`Preview ${img.title ?? img.alt ?? "project"}`}
+                  onClick={() => onImageClick(img)}
+                  className="pointer-events-auto absolute inset-0 z-10 flex cursor-pointer items-center justify-center rounded-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary"
+                >
+                  <span className="translate-y-2 rounded-full border border-white/30 bg-black/65 px-4 py-2 text-xs font-medium text-white opacity-0 shadow-lg backdrop-blur-sm transition duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                    Preview
+                  </span>
+                </button>
+              )}
             </div>
           );
         })}
