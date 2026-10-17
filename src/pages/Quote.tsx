@@ -97,7 +97,7 @@ export default function QuotePage() {
                 <Check className="w-8 h-8 text-primary" />
               </div>
               <h1 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
-                Thanks — your request has been sent.
+                Thanks. Your request has been sent.
               </h1>
               <p className="text-muted-foreground text-base md:text-lg">
                 I'll review your answers and get back to you within 24 hours.
