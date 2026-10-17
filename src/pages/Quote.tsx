@@ -55,7 +55,7 @@ export default function QuotePage() {
       toast.error("Please enter a valid email address.");
       return;
     }
-     setSending(true);
+    setSending(true);
     try {
       const { data, error } = await supabase.functions.invoke("send-quote", {
         body: {
@@ -178,7 +178,7 @@ export default function QuotePage() {
                             autoComplete="name"
                             required
                             value={answers.name || ""}
-                            onChange={(e) => setAnswers({ ...answers, name: e.target.value })
+                            onChange={(e) => setAnswers({ ...answers, name: e.target.value })}
                             placeholder="Your name"
                             className="h-12"
                           />
@@ -192,7 +192,7 @@ export default function QuotePage() {
                             autoComplete="email"
                             required
                             value={answers.email || ""}
-                            onChange={(e) => setAnswers({ ...answers, email: e.target.value })
+                            onChange={(e) => setAnswers({ ...answers, email: e.target.value })}
                             placeholder="you@example.com"
                             className="h-12"
                           />
